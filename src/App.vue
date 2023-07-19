@@ -17,6 +17,7 @@
       </div>
     </div>
     <button @click="sendToArduino">Send to Arduino</button>
+    <p>&copy; 2023 Smallwood Research Group SJSU</p>
   </div>
 </template>
 
