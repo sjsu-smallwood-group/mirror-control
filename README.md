@@ -10,7 +10,6 @@ It is recommended to use nvm [node version manager]
 ```
 git clone https://github.com/sjsu-smallwood-group/mirror-control-js.git
 cd mirror-control-js
-npm install
-npm run electron:build
-npm run electron:serve
+yarn install
+yarn electron:serve
 ```

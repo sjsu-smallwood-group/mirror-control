@@ -22,6 +22,9 @@
 </template>
 
 <script>
+import fs from 'fs'
+const path = './slider-values.json';
+
 export default {
   data() {
     return {
@@ -41,6 +44,18 @@ export default {
     sendToArduino() {
       console.log('Sending values to Arduino:', this.sliders);
       // Implement your functionality here
+      this.saveSliders();
+    },
+    initSliders() {
+      if (fs.existsSync(path)) {
+        const data = fs.readFileSync(path, 'utf8');
+        this.sliders = JSON.parse(data);
+      }
+    },
+    saveSliders() {
+      console.log('writing')
+      const data = JSON.stringify(this.sliders);
+      fs.writeFileSync(path, data);
     },
   },
 };
