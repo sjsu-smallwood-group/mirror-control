@@ -18,7 +18,7 @@
     </div>
     <button @click="sendToArduino">Send to Arduino</button>
     <p>&copy; 2023 Smallwood Research Group SJSU</p>
-    <div class="help-message" v-if="dBoolShowHelpMessage">{{helpMessage}}</div>
+    <div class="help-message" v-if="dBoolShowHelpMessage" v-html="helpMessage"></div>
   </div>
 </template>
 
@@ -59,15 +59,14 @@ export default {
   },
   methods: {
     sendToArduino() {
-     this.showHelpMessage('Asking arduino to: \n' +
-        `1. For MotorA: move X axis by ${this.sliders.MotorA.x - this.initialSliders.MotorA.x} turns forward, ` +
-        `Y axis by ${this.sliders.MotorA.y - this.initialSliders.MotorA.y} turns backward \n` +
-        `2. For MotorB: move X axis by ${this.sliders.MotorB.x - this.initialSliders.MotorB.x} turns forward, ` +
-        `Y axis by ${this.sliders.MotorB.y - this.initialSliders.MotorB.y} turns backward`);
-      this.dBoolShowHelpMessage = true;
-      setTimeout(() => {
-        this.dBoolShowHelpMessage = false;
-      }, 10000);
+     
+      this.showHelpMessage(`Arduino told: \n
+    <b>Motor A:</b> move X axis by ${this.colorNumber(this.sliders.MotorA.x - this.initialSliders.MotorA.x)}, 
+    Y axis by ${this.colorNumber(this.sliders.MotorA.y - this.initialSliders.MotorA.y)} \n
+    <b>Motor B:</b> move X axis by ${this.colorNumber(this.sliders.MotorB.x - this.initialSliders.MotorB.x)}, 
+    Y axis by ${this.colorNumber(this.sliders.MotorB.y - this.initialSliders.MotorB.y)}`); 
+      
+      
       this.saveSliders();
     },
     initSliders() {
@@ -94,7 +93,13 @@ export default {
         this.dBoolShowHelpMessage = false;
       }, 10000);
     },
-   },
+    formatNumber(num) {
+      return num.toLocaleString();
+    },
+    colorNumber(num) {
+      return `<span class='${num >= 0 ? 'positive' : 'negative'}'>${this.formatNumber(num)}</span>`;
+    },
+  },
 };
 </script>
 
@@ -197,4 +202,11 @@ button:hover {
     background-color: #e0e0e0;
     color: #495057;
   }
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
 </style>
