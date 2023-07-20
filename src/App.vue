@@ -6,18 +6,19 @@
         <h2>Mirror {{ mirror }}</h2>
         <div class="axis-wrapper">
           <div class="axis x-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[mirror].x" class="slider">
-            <input type="number" min="0" max="264200" v-model="sliders[mirror].x" class="value-box">
+            <input type="range" min="0" max="264200" v-model="sliders[mirror].x" class="slider" @input="showHelpMessage">
+            <input type="number" min="0" max="264200" v-model="sliders[mirror].x" class="value-box" @input="showHelpMessage">
           </div>
           <div class="axis y-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[mirror].y" class="slider vertical">
-            <input type="number" min="0" max="264200" v-model="sliders[mirror].y" class="value-box">
+            <input type="range" min="0" max="264200" v-model="sliders[mirror].y" class="slider vertical" @input="showHelpMessage">
+            <input type="number" min="0" max="264200" v-model="sliders[mirror].y" class="value-box" @input="showHelpMessage">
           </div>
         </div>
       </div>
     </div>
     <button @click="sendToArduino">Send to Arduino</button>
     <p>&copy; 2023 Smallwood Research Group SJSU</p>
+    <div class="help-message" v-if="dBoolShowHelpMessage">This is the number of screw turns. The maximum screw turns for this model is 264,200</div>
   </div>
 </template>
 
@@ -37,7 +38,9 @@ export default {
           x: 0,
           y: 0
         }
-      }
+      },
+      dBoolShowHelpMessage: false
+
     };
   },
   created() {
@@ -59,6 +62,13 @@ export default {
       console.log('writing')
       const data = JSON.stringify(this.sliders);
       fs.writeFileSync(path, data);
+    },
+     showHelpMessage() {
+      this.dBoolShowHelpMessage = true;
+      // Remove the help message after 3 seconds
+      setTimeout(() => {
+        this.dBoolShowHelpMessage = false;
+      }, 10000);
     },
   },
 };
@@ -153,4 +163,14 @@ button:hover {
   padding: 5px;
   width: 90px;
 }
+.help-message {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #e0e0e0;
+    color: #495057;
+  }
 </style>
