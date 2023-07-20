@@ -6,12 +6,12 @@
     <h2>{{ motor.name }}</h2>
     <div class="axis-wrapper">
       <div class="axis x-axis">
-        <input type="range" min="0" max="264200" v-model="sliders[motor.id].x" class="slider" @input="showHelpMessage( motor.name + ' X axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].x) + '. Planned: ' + formatNumber(sliders[motor.id].x - initialSliders[motor.id].x))">
-        <input type="number" min="0" max="264200" v-model="sliders[motor.id].x" class="value-box" @input="showHelpMessage( motor.name + ' X axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].x)+ '. Planned: ' + formatNumber(sliders[motor.id].x - initialSliders[motor.id].x))">
+        <input type="range" min="0" max="264200" v-model="sliders[motor.id].x" class="slider" @input="showHelpMessage( motor.name + ' X axis Screw turns. Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].x) + '. Planned: ' + formatNumber(sliders[motor.id].x - initialSliders[motor.id].x))">
+        <input type="number" min="0" max="264200" v-model="sliders[motor.id].x" class="value-box" @input="showHelpMessage( motor.name + ' X axis Screw turns. Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].x)+ '. Planned: ' + formatNumber(sliders[motor.id].x - initialSliders[motor.id].x))">
       </div>
       <div class="axis y-axis">
-        <input type="range" min="0" max="264200" v-model="sliders[motor.id].y" class="slider vertical" @input="showHelpMessage ( motor.name + ' Y axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].y)+ '. Planned: ' + formatNumber(sliders[motor.id].y - initialSliders[motor.id].y))">
-        <input type="number" min="0" max="264200" v-model="sliders[motor.id].y" class="value-box" @input="showHelpMessage ( motor.name + ' Y axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].y) + '. Planned: ' + formatNumber(sliders[motor.id].y - initialSliders[motor.id].y))">
+        <input type="range" min="0" max="264200" v-model="sliders[motor.id].y" class="slider vertical" @input="showHelpMessage ( motor.name + ' Y axis Screw turns. Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].y)+ '. Planned: ' + formatNumber(sliders[motor.id].y - initialSliders[motor.id].y))">
+        <input type="number" min="0" max="264200" v-model="sliders[motor.id].y" class="value-box" @input="showHelpMessage ( motor.name + ' Y axis Screw turns. Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].y) + '. Planned: ' + formatNumber(sliders[motor.id].y - initialSliders[motor.id].y))">
       </div>
     </div>
    </div>
@@ -60,11 +60,11 @@ export default {
   methods: {
     sendToArduino() {
      
-      this.showHelpMessage(`Arduino told: \n
-    <b>Motor A:</b> move X axis by ${this.colorNumber(this.sliders.MotorA.x - this.initialSliders.MotorA.x)}, 
-    Y axis by ${this.colorNumber(this.sliders.MotorA.y - this.initialSliders.MotorA.y)} \n
-    <b>Motor B:</b> move X axis by ${this.colorNumber(this.sliders.MotorB.x - this.initialSliders.MotorB.x)}, 
-    Y axis by ${this.colorNumber(this.sliders.MotorB.y - this.initialSliders.MotorB.y)}`); 
+      this.showHelpMessage(`Arduino told to turn screws: \n
+    <b>Motor A:</b> X: ${this.colorNumber(this.sliders.MotorA.x - this.initialSliders.MotorA.x)}, 
+    Y: ${this.colorNumber(this.sliders.MotorA.y - this.initialSliders.MotorA.y)} \n
+    <b>Motor B:</b> X: ${this.colorNumber(this.sliders.MotorB.x - this.initialSliders.MotorB.x)}, 
+    Y: ${this.colorNumber(this.sliders.MotorB.y - this.initialSliders.MotorB.y)}`); 
       
       
       this.saveSliders();
