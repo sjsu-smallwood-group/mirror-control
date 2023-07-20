@@ -6,12 +6,12 @@
     <h2>{{ motor.name }}</h2>
     <div class="axis-wrapper">
       <div class="axis x-axis">
-        <input type="range" min="0" max="264200" v-model="sliders[motor.id].x" class="slider" @input="showHelpMessage( motor.name + ' X axis max screw turns 264,200. Initial value ' + formatNumber(initialSliders[motor.id].x))">
-        <input type="number" min="0" max="264200" v-model="sliders[motor.id].x" class="value-box" @input="showHelpMessage( motor.name + ' X axis max screw turns 264,200. Initial value ' + formatNumber(initialSliders[motor.id].x))">
+        <input type="range" min="0" max="264200" v-model="sliders[motor.id].x" class="slider" @input="showHelpMessage( motor.name + ' X axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].x) + '. Planned: ' + formatNumber(sliders[motor.id].x - initialSliders[motor.id].x))">
+        <input type="number" min="0" max="264200" v-model="sliders[motor.id].x" class="value-box" @input="showHelpMessage( motor.name + ' X axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].x)+ '. Planned: ' + formatNumber(sliders[motor.id].x - initialSliders[motor.id].x))">
       </div>
       <div class="axis y-axis">
-        <input type="range" min="0" max="264200" v-model="sliders[motor.id].y" class="slider vertical" @input="showHelpMessage ( motor.name + ' Y axis max screw turns 264,200. Initial value ' + formatNumber(initialSliders[motor.id].y))">
-        <input type="number" min="0" max="264200" v-model="sliders[motor.id].y" class="value-box" @input="showHelpMessage ( motor.name + ' Y axis max screw turns 264,200. Initial value ' + formatNumber(initialSliders[motor.id].y))">
+        <input type="range" min="0" max="264200" v-model="sliders[motor.id].y" class="slider vertical" @input="showHelpMessage ( motor.name + ' Y axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].y)+ '. Planned: ' + formatNumber(sliders[motor.id].y - initialSliders[motor.id].y))">
+        <input type="number" min="0" max="264200" v-model="sliders[motor.id].y" class="value-box" @input="showHelpMessage ( motor.name + ' Y axis Screw turns Max: 264,200. Initial: ' + formatNumber(initialSliders[motor.id].y) + '. Planned: ' + formatNumber(sliders[motor.id].y - initialSliders[motor.id].y))">
       </div>
     </div>
    </div>
