@@ -18,7 +18,7 @@
     </div>
     <button @click="sendToArduino">Send to Arduino</button>
     <p>&copy; 2023 Smallwood Research Group SJSU</p>
-    <div class="help-message" v-if="dBoolShowHelpMessage">This is the number of screw turns. The maximum screw turns for this model is 264,200</div>
+    <div class="help-message" v-if="dBoolShowHelpMessage">{{helpMessage}}</div>
   </div>
 </template>
 
@@ -39,6 +39,16 @@ export default {
           y: 0
         }
       },
+      initialSliders: {
+        A: {
+          x: 0,
+          y: 0
+        },
+        B: {
+          x: 0,
+          y: 0
+        }
+      },
       dBoolShowHelpMessage: false
 
     };
@@ -48,14 +58,23 @@ export default {
   },
   methods: {
     sendToArduino() {
-      console.log('Sending values to Arduino:', this.sliders);
-      // Implement your functionality here
-      this.saveSliders();
+     this.helpMessage = 'Asking arduino to: \n' +
+        `1. For mirror A: move X axis by ${this.sliders.A.x - this.initialSliders.A.x} turns forward, ` +
+        `Y axis by ${this.sliders.A.y - this.initialSliders.A.y} turns backward \n` +
+        `2. For mirror B: move X axis by ${this.sliders.B.x - this.initialSliders.B.x} turns forward, ` +
+        `Y axis by ${this.sliders.B.y - this.initialSliders.B.y} turns backward`;
+      this.dBoolShowHelpMessage = true;
+      // Remove the help message after 3 seconds
+      setTimeout(() => {
+        this.dBoolShowHelpMessage = false;
+      }, 10000);
+      this.saveSliders();      this.saveSliders();
     },
     initSliders() {
       if (fs.existsSync(path)) {
         const data = fs.readFileSync(path, 'utf8');
         this.sliders = JSON.parse(data);
+        this.initialSliders = JSON.parse(data);
       }
     },
     saveSliders() {
@@ -64,6 +83,7 @@ export default {
       fs.writeFileSync(path, data);
     },
      showHelpMessage() {
+      this.helpMessage = 'This is the number of screw turns. The maximum screw turns for this model is 264,200';
       this.dBoolShowHelpMessage = true;
       // Remove the help message after 3 seconds
       setTimeout(() => {
