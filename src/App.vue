@@ -3,15 +3,15 @@
     <h1>Dual Mirror Synchronization System</h1>
     <div class="motor-wrapper">
       <div class="motor" v-for="motor in ['MotorA', 'MotorB']" :key="motor">
-        <h2>Motor {{ motor }}</h2>
+        <h2>{{ motor }}</h2>
         <div class="axis-wrapper">
           <div class="axis x-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[motor].x" class="slider" @input="showHelpMessage">
-            <input type="number" min="0" max="264200" v-model="sliders[motor].x" class="value-box" @input="showHelpMessage">
+            <input type="range" min="0" max="264200" v-model="sliders[motor].x" class="slider" @input="showHelpMessage( motor + ' X axis max screw turns 264200')">
+            <input type="number" min="0" max="264200" v-model="sliders[motor].x" class="value-box" @input="showHelpMessage( motor + ' X axis max screw turns 264200')">
           </div>
           <div class="axis y-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[motor].y" class="slider vertical" @input="showHelpMessage">
-            <input type="number" min="0" max="264200" v-model="sliders[motor].y" class="value-box" @input="showHelpMessage">
+            <input type="range" min="0" max="264200" v-model="sliders[motor].y" class="slider vertical" @input="showHelpMessage ( motor + ' Y axis max screw turns 264200')" >
+            <input type="number" min="0" max="264200" v-model="sliders[motor].y" class="value-box" @input="showHelpMessage ( motor + ' Y axis max screw turns 264200')">
           </div>
         </div>
       </div>
@@ -49,7 +49,9 @@ export default {
           y: 0
         }
       },
-      dBoolShowHelpMessage: false
+      dBoolShowHelpMessage: false,
+      helpMessage:'',
+      helpMessageTimeout: null, // for keeping track of the timer. If this help message is being shown on the screen "This is the number of screw turns. The maximum screw turns for this model is 264,200" and I click on "Send to Arduino" then the help message from sendToArduino message should come right away
     };
   },
   created() {
@@ -57,11 +59,11 @@ export default {
   },
   methods: {
     sendToArduino() {
-     this.helpMessage = 'Asking arduino to: \n' +
+     this.showHelpMessage('Asking arduino to: \n' +
         `1. For MotorA: move X axis by ${this.sliders.MotorA.x - this.initialSliders.MotorA.x} turns forward, ` +
         `Y axis by ${this.sliders.MotorA.y - this.initialSliders.MotorA.y} turns backward \n` +
         `2. For MotorB: move X axis by ${this.sliders.MotorB.x - this.initialSliders.MotorB.x} turns forward, ` +
-        `Y axis by ${this.sliders.MotorB.y - this.initialSliders.MotorB.y} turns backward`;
+        `Y axis by ${this.sliders.MotorB.y - this.initialSliders.MotorB.y} turns backward`);
       this.dBoolShowHelpMessage = true;
       setTimeout(() => {
         this.dBoolShowHelpMessage = false;
@@ -80,14 +82,19 @@ export default {
       const data = JSON.stringify(this.sliders);
       fs.writeFileSync(path, data);
     },
-     showHelpMessage() {
-      this.helpMessage = 'This is the number of screw turns. The maximum screw turns for this model is 264,200';
+    showHelpMessage(newMessage) {
+      this.helpMessage = newMessage;
       this.dBoolShowHelpMessage = true;
-      setTimeout(() => {
+      // Clear any existing timers
+      if (this.helpMessageTimeout) {
+        clearTimeout(this.helpMessageTimeout);
+      }
+      // Set a new timer
+      this.helpMessageTimeout = setTimeout(() => {
         this.dBoolShowHelpMessage = false;
       }, 10000);
     },
-  },
+   },
 };
 </script>
 
