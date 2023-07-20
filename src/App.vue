@@ -6,12 +6,12 @@
         <h2>Mirror {{ mirror }}</h2>
         <div class="axis-wrapper">
           <div class="axis x-axis">
-            <input type="range" min="-100" max="100" v-model="sliders[mirror].x" class="slider">
-            <input type="number" min="-100" max="100" v-model="sliders[mirror].x" class="value-box">
+            <input type="range" min="0" max="264200" v-model="sliders[mirror].x" class="slider">
+            <input type="number" min="0" max="264200" v-model="sliders[mirror].x" class="value-box">
           </div>
           <div class="axis y-axis">
-            <input type="range" min="-100" max="100" v-model="sliders[mirror].y" class="slider vertical">
-            <input type="number" min="-100" max="100" v-model="sliders[mirror].y" class="value-box">
+            <input type="range" min="0" max="264200" v-model="sliders[mirror].y" class="slider vertical">
+            <input type="number" min="0" max="264200" v-model="sliders[mirror].y" class="value-box">
           </div>
         </div>
       </div>
@@ -30,12 +30,12 @@ export default {
     return {
       sliders: {
         A: {
-          x: 100,
-          y: 100
+          x: 0,
+          y: 0
         },
         B: {
-          x: 100,
-          y: 100
+          x: 0,
+          y: 0
         }
       }
     };
@@ -151,6 +151,6 @@ button:hover {
 .value-box {
   border: 1px solid #ccc;
   padding: 5px;
-  width: 60px;
+  width: 90px;
 }
 </style>
