@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <h1>Dual Mirror Synchronization System</h1>
-    <div class="mirror-wrapper">
-      <div class="mirror" v-for="mirror in ['A', 'B']" :key="mirror">
-        <h2>Mirror {{ mirror }}</h2>
+    <div class="motor-wrapper">
+      <div class="motor" v-for="motor in ['MotorA', 'MotorB']" :key="motor">
+        <h2>Motor {{ motor }}</h2>
         <div class="axis-wrapper">
           <div class="axis x-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[mirror].x" class="slider" @input="showHelpMessage">
-            <input type="number" min="0" max="264200" v-model="sliders[mirror].x" class="value-box" @input="showHelpMessage">
+            <input type="range" min="0" max="264200" v-model="sliders[motor].x" class="slider" @input="showHelpMessage">
+            <input type="number" min="0" max="264200" v-model="sliders[motor].x" class="value-box" @input="showHelpMessage">
           </div>
           <div class="axis y-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[mirror].y" class="slider vertical" @input="showHelpMessage">
-            <input type="number" min="0" max="264200" v-model="sliders[mirror].y" class="value-box" @input="showHelpMessage">
+            <input type="range" min="0" max="264200" v-model="sliders[motor].y" class="slider vertical" @input="showHelpMessage">
+            <input type="number" min="0" max="264200" v-model="sliders[motor].y" class="value-box" @input="showHelpMessage">
           </div>
         </div>
       </div>
@@ -30,27 +30,26 @@ export default {
   data() {
     return {
       sliders: {
-        A: {
+        MotorA: {
           x: 0,
           y: 0
         },
-        B: {
+        MotorB: {
           x: 0,
           y: 0
         }
       },
       initialSliders: {
-        A: {
+        MotorA: {
           x: 0,
           y: 0
         },
-        B: {
+        MotorB: {
           x: 0,
           y: 0
         }
       },
       dBoolShowHelpMessage: false
-
     };
   },
   created() {
@@ -59,16 +58,15 @@ export default {
   methods: {
     sendToArduino() {
      this.helpMessage = 'Asking arduino to: \n' +
-        `1. For mirror A: move X axis by ${this.sliders.A.x - this.initialSliders.A.x} turns forward, ` +
-        `Y axis by ${this.sliders.A.y - this.initialSliders.A.y} turns backward \n` +
-        `2. For mirror B: move X axis by ${this.sliders.B.x - this.initialSliders.B.x} turns forward, ` +
-        `Y axis by ${this.sliders.B.y - this.initialSliders.B.y} turns backward`;
+        `1. For MotorA: move X axis by ${this.sliders.MotorA.x - this.initialSliders.MotorA.x} turns forward, ` +
+        `Y axis by ${this.sliders.MotorA.y - this.initialSliders.MotorA.y} turns backward \n` +
+        `2. For MotorB: move X axis by ${this.sliders.MotorB.x - this.initialSliders.MotorB.x} turns forward, ` +
+        `Y axis by ${this.sliders.MotorB.y - this.initialSliders.MotorB.y} turns backward`;
       this.dBoolShowHelpMessage = true;
-      // Remove the help message after 3 seconds
       setTimeout(() => {
         this.dBoolShowHelpMessage = false;
       }, 10000);
-      this.saveSliders();      this.saveSliders();
+      this.saveSliders();
     },
     initSliders() {
       if (fs.existsSync(path)) {
@@ -85,7 +83,6 @@ export default {
      showHelpMessage() {
       this.helpMessage = 'This is the number of screw turns. The maximum screw turns for this model is 264,200';
       this.dBoolShowHelpMessage = true;
-      // Remove the help message after 3 seconds
       setTimeout(() => {
         this.dBoolShowHelpMessage = false;
       }, 10000);
@@ -99,13 +96,13 @@ h1 {
   text-align: center;
 }
 
-.mirror-wrapper {
+.motor-wrapper {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.mirror {
+.motor {
   flex: 1;
   padding: 0 20px;
 }
