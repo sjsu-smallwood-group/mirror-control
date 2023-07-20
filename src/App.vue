@@ -40,6 +40,9 @@ export default {
       }
     };
   },
+  created() {
+    this.initSliders();
+  },
   methods: {
     sendToArduino() {
       console.log('Sending values to Arduino:', this.sliders);
