@@ -2,19 +2,19 @@
   <div id="app">
     <h1>Dual Mirror Synchronization System</h1>
     <div class="motor-wrapper">
-      <div class="motor" v-for="motor in ['MotorA', 'MotorB']" :key="motor">
-        <h2>{{ motor }}</h2>
-        <div class="axis-wrapper">
-          <div class="axis x-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[motor].x" class="slider" @input="showHelpMessage( motor + ' X axis max screw turns 264200')">
-            <input type="number" min="0" max="264200" v-model="sliders[motor].x" class="value-box" @input="showHelpMessage( motor + ' X axis max screw turns 264200')">
-          </div>
-          <div class="axis y-axis">
-            <input type="range" min="0" max="264200" v-model="sliders[motor].y" class="slider vertical" @input="showHelpMessage ( motor + ' Y axis max screw turns 264200')" >
-            <input type="number" min="0" max="264200" v-model="sliders[motor].y" class="value-box" @input="showHelpMessage ( motor + ' Y axis max screw turns 264200')">
-          </div>
-        </div>
+      <div class="motor" v-for="motor in [{id:'MotorA', name: 'Motor A'}, {id:'MotorB', name: 'Motor B'}]" :key="motor.id">
+    <h2>{{ motor.name }}</h2>
+    <div class="axis-wrapper">
+      <div class="axis x-axis">
+        <input type="range" min="0" max="264200" v-model="sliders[motor.id].x" class="slider" @input="showHelpMessage( motor.name + ' X axis max screw turns 264200')">
+        <input type="number" min="0" max="264200" v-model="sliders[motor.id].x" class="value-box" @input="showHelpMessage( motor.name + ' X axis max screw turns 264200')">
       </div>
+      <div class="axis y-axis">
+        <input type="range" min="0" max="264200" v-model="sliders[motor.id].y" class="slider vertical" @input="showHelpMessage ( motor.name + ' Y axis max screw turns 264200')" >
+        <input type="number" min="0" max="264200" v-model="sliders[motor.id].y" class="value-box" @input="showHelpMessage ( motor.name + ' Y axis max screw turns 264200')">
+      </div>
+    </div>
+   </div>
     </div>
     <button @click="sendToArduino">Send to Arduino</button>
     <p>&copy; 2023 Smallwood Research Group SJSU</p>
