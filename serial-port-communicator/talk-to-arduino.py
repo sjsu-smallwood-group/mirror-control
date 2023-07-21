@@ -1,8 +1,17 @@
 import sqlite3
 import time
+import serial
+
+# Serial port settings
+port = "/dev/ttyACM0"  # replace with your Arduino's port
+baud_rate = 9600
+
+# SQLite settings
+db_path = "../experimental-results.sqlite"
+table_name = "sliders"
 
 # connect to the database
-conn = sqlite3.connect("../experimental-results.sqlite")
+conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
 # initialize the last seen ID and motor values
@@ -24,7 +33,6 @@ while True:
 
     # check if there's a new row
     if current_id != last_id:
-        # print("New row inserted!")
         last_id = current_id
 
         # fetch the new row's data
@@ -49,11 +57,19 @@ while True:
         last_motorB_abs_X = row_dict["motorB_abs_X"]
         last_motorB_abs_Y = row_dict["motorB_abs_Y"]
 
-        # print(f"Row data: {row_dict}")
-        print(f"motorA_delta_X: {motorA_delta_X}")
-        print(f"motorA_delta_Y: {motorA_delta_Y}")
-        print(f"motorB_delta_X: {motorB_delta_X}")
-        print(f"motorB_delta_Y: {motorB_delta_Y}")
+        # Send the data to the Arduino
+        message = (
+            f"{motorA_delta_X},{motorA_delta_Y},{motorB_delta_X},{motorB_delta_Y}\n"
+        )
+
+        try:
+            ser = serial.Serial(port, baud_rate)
+            time.sleep(2)  # give the connection a second to settle
+            ser.write(message.encode())
+            ser.close()
+        except serial.SerialException as e:
+            with open("debug.txt", "a") as f:  # open the file in append mode
+                f.write(f"Failed to send message: {message} Error: {e}\n")
 
     # wait before checking again
     time.sleep(1)
