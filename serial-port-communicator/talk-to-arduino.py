@@ -65,6 +65,8 @@ while True:
             f"{motorA_delta_X},{motorA_delta_Y},{motorB_delta_X},{motorB_delta_Y}\n"
         )
 
+        print(message);
+        
         try:
             ser = serial.Serial(port, baud_rate)
             time.sleep(2)  # give the connection a second to settle
