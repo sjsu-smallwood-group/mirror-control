@@ -1,83 +1,59 @@
-import time
 import sqlite3
-import serial
-from watchdog.observers import Observer
-from watchdog.events import PatternMatchingEventHandler
+import time
 
-# Serial port settings
-port = "/dev/ttyACM0"  # replace with your Arduino's port
-baud_rate = 9600
+# connect to the database
+conn = sqlite3.connect("../experimental-results.sqlite")
+cursor = conn.cursor()
 
-# SQLite settings
-db_path = "../experimental-results.sqlite"
-table_name = "sliders"
+# initialize the last seen ID and motor values
+cursor.execute(
+    "SELECT MAX(id), motorA_abs_X, motorA_abs_Y, motorB_abs_X, motorB_abs_Y FROM sliders"
+)
+(
+    last_id,
+    last_motorA_abs_X,
+    last_motorA_abs_Y,
+    last_motorB_abs_X,
+    last_motorB_abs_Y,
+) = cursor.fetchone()
 
-# Watchdog settings
-watch_patterns = [db_path]
-watch_ignore_patterns = []
-watch_ignore_directories = False
-watch_case_sensitive = True
+while True:
+    # get the last row's ID
+    cursor.execute("SELECT MAX(id) FROM sliders")
+    current_id = cursor.fetchone()[0]
 
-# Global variable to hold the last ID processed
-last_id_processed = 0
+    # check if there's a new row
+    if current_id != last_id:
+        # print("New row inserted!")
+        last_id = current_id
 
+        # fetch the new row's data
+        cursor.execute("SELECT * FROM sliders WHERE id=?", (last_id,))
+        row_data = cursor.fetchone()
 
-def on_modified(event):
-    print("File modified: ", event.src_path)
-    global last_id_processed
+        # fetch the column names
+        column_names = [description[0] for description in cursor.description]
 
-    # Connect to the SQLite database
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
+        # create a dictionary mapping column names to data
+        row_dict = dict(zip(column_names, row_data))
 
-    # Get the last row
-    query = f"SELECT * FROM {table_name} ORDER BY id DESC LIMIT 1"
-    cursor.execute(query)
-    row = cursor.fetchone()
+        # calculate deltas
+        motorA_delta_X = row_dict["motorA_abs_X"] - last_motorA_abs_X
+        motorA_delta_Y = row_dict["motorA_abs_Y"] - last_motorA_abs_Y
+        motorB_delta_X = row_dict["motorB_abs_X"] - last_motorB_abs_X
+        motorB_delta_Y = row_dict["motorB_abs_Y"] - last_motorB_abs_Y
 
-    # Check if there's a new row
-    if row and row[0] != last_id_processed:
-        last_id_processed = row[0]
+        # update last motor values
+        last_motorA_abs_X = row_dict["motorA_abs_X"]
+        last_motorA_abs_Y = row_dict["motorA_abs_Y"]
+        last_motorB_abs_X = row_dict["motorB_abs_X"]
+        last_motorB_abs_Y = row_dict["motorB_abs_Y"]
 
-        # Get the relevant fields
-        motor_a_x = row[2]
-        motor_a_y = row[3]
-        motor_b_x = row[4]
-        motor_b_y = row[5]
+        # print(f"Row data: {row_dict}")
+        print(f"motorA_delta_X: {motorA_delta_X}")
+        print(f"motorA_delta_Y: {motorA_delta_Y}")
+        print(f"motorB_delta_X: {motorB_delta_X}")
+        print(f"motorB_delta_Y: {motorB_delta_Y}")
 
-        # Create the serial connection
-        ser = serial.Serial(port, baud_rate)
-        time.sleep(2)  # give the connection a second to settle
-
-        # Send the data to the Arduino
-        message = f"{motor_a_x},{motor_a_y},{motor_b_x},{motor_b_y}\n"
-        print("Sending message to Arduino: ", message)  # add this line
-        ser.write(message.encode())
-
-        # Close the serial connection
-        ser.close()
-
-    # Close the database connection
-    conn.close()
-
-
-if __name__ == "__main__":
-    event_handler = PatternMatchingEventHandler(
-        watch_patterns,
-        watch_ignore_patterns,
-        watch_ignore_directories,
-        watch_case_sensitive,
-    )
-    event_handler.on_modified = on_modified
-
-    observer = Observer()
-    observer.schedule(event_handler, ".", recursive=True)
-    observer.start()
-
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-
-    observer.join()
+    # wait before checking again
+    time.sleep(1)
