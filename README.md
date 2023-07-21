@@ -2,6 +2,13 @@
 
 # How to run this app on mac?
 
+git clone https://github.com/sjsu-smallwood-group/mirror-control-js.git
+cd mirror-control
+
+Subsystem1: Run gui
+Subsystem2: Run serial-port-communicator
+Subsystem3: Run code-on-arduino
+
 ## System diagram
 
 ```

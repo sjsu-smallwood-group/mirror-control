@@ -6,8 +6,6 @@ node -v
 It is recommended to use nvm [node version manager]
 
 ```
-git clone https://github.com/sjsu-smallwood-group/mirror-control-js.git
-cd mirror-control-js
 yarn install
 yarn electron:serve
 ```
