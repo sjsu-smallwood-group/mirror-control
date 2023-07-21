@@ -100,9 +100,9 @@ void loop()
     int motorB_Y_turns = incomingData[3];
 
     // Execute steps based on the number of turns for each Motor and axis
-    do_steps(motorA_X_turns, motorA_step_pin, motorA_dir_pin);
-    do_steps(motorA_Y_turns, motorA_step_pin, motorA_dir_pin);
-    do_steps(motorB_X_turns, motorB_step_pin, motorB_dir_pin);
-    do_steps(motorB_Y_turns, motorB_step_pin, motorB_dir_pin);
+    do_steps(motorA_X_turns, motorA_X_step_pin, motorA_X_dir_pin);
+    do_steps(motorA_Y_turns, motorA_Y_step_pin, motorA_Y_dir_pin);
+    do_steps(motorB_X_turns, motorB_X_step_pin, motorB_X_dir_pin);
+    do_steps(motorB_Y_turns, motorB_Y_step_pin, motorB_Y_dir_pin);
   }
 }
