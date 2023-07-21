@@ -17,18 +17,18 @@ So there are 4 kinds of screw turns. 2 for Motor A (X and Y Axis) and 2 for Moto
 
 // Motor control pins
 // This is motor A that will control the first mirror
-int motorA_X_step_pin = 11; // A step pin
-int motorA_X_dir_pin = 10; // A direction pin
+int motor1_ChnB_step_pin = 11; // A step pin
+int motor1_ChnB_dir_pin = 10; // A direction pin
 
-int motorA_Y_step_pin = 9; // A step pin
-int motorA_Y_dir_pin = 8; // A direction pin
+int motor1_ChnC_step_pin = 9; // A step pin
+int motor1_ChnC_dir_pin = 8; // A direction pin
 
 // This is motor B that will control the second mirror To disable set the pin numbers to 0
-int motorB_X_step_pin = 0; // B step pin
-int motorB_X_dir_pin = 0; // B direction pin
+int motor2_ChnB_step_pin = 0; // B step pin
+int motor2_ChnB_dir_pin = 0; // B direction pin
 
-int motorB_Y_step_pin = 0; // B step pin
-int motorB_Y_dir_pin = 0; // B direction pin
+int motor2_ChnC_step_pin = 0; // B step pin
+int motor2_ChnC_dir_pin = 0; // B direction pin
 
 void setup()
 {
@@ -39,16 +39,16 @@ void setup()
   }
 
   // set the motor control pins as outputs
-  pinMode(motorA_X_step_pin, OUTPUT); 
-  pinMode(motorA_X_dir_pin, OUTPUT); 
-  pinMode(motorA_Y_step_pin, OUTPUT); 
-  pinMode(motorA_Y_dir_pin, OUTPUT); 
+  pinMode(motor1_ChnB_step_pin, OUTPUT); 
+  pinMode(motor1_ChnB_dir_pin, OUTPUT); 
+  pinMode(motor1_ChnC_step_pin, OUTPUT); 
+  pinMode(motor1_ChnC_dir_pin, OUTPUT); 
   
   
-  pinMode(motorB_X_step_pin, OUTPUT); 
-  pinMode(motorB_X_dir_pin, OUTPUT); 
-  pinMode(motorB_Y_step_pin, OUTPUT); 
-  pinMode(motorB_Y_dir_pin, OUTPUT); 
+  pinMode(motor2_ChnB_step_pin, OUTPUT); 
+  pinMode(motor2_ChnB_dir_pin, OUTPUT); 
+  pinMode(motor2_ChnC_step_pin, OUTPUT); 
+  pinMode(motor2_ChnC_dir_pin, OUTPUT); 
   
 }
 
@@ -94,15 +94,15 @@ void loop()
     }
 
     // Extract the number of turns for each Motor and axis
-    int motorA_X_turns = incomingData[0];
-    int motorA_Y_turns = incomingData[1];
-    int motorB_X_turns = incomingData[2];
-    int motorB_Y_turns = incomingData[3];
+    int motor1_ChnB_turns = incomingData[0];
+    int motor1_ChnC_turns = incomingData[1];
+    int motor2_ChnB_turns = incomingData[2];
+    int motor2_ChnC_turns = incomingData[3];
 
     // Execute steps based on the number of turns for each Motor and axis
-    do_steps(motorA_X_turns, motorA_X_step_pin, motorA_X_dir_pin);
-    do_steps(motorA_Y_turns, motorA_Y_step_pin, motorA_Y_dir_pin);
-    do_steps(motorB_X_turns, motorB_X_step_pin, motorB_X_dir_pin);
-    do_steps(motorB_Y_turns, motorB_Y_step_pin, motorB_Y_dir_pin);
+    do_steps(motor1_ChnB_turns, motor1_ChnB_step_pin, motor1_ChnB_dir_pin);
+    do_steps(motor1_ChnC_turns, motor1_ChnC_step_pin, motor1_ChnC_dir_pin);
+    do_steps(motor2_ChnB_turns, motor2_ChnB_step_pin, motor2_ChnB_dir_pin);
+    do_steps(motor2_ChnC_turns, motor2_ChnC_step_pin, motor2_ChnC_dir_pin);
   }
 }
