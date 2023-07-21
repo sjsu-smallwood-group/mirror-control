@@ -6,6 +6,15 @@ node -v
 It is recommended to use nvm [node version manager]
 
 ```
-yarn install
-yarn electron:serve
+# Step 1/2: Installing dependencies:
+
+> yarn install
+If you do not have yarn installed, you can install it with the command:
+> npm install -g yarn
+If you do not have node:
+> brew install node
+
+# Step 2/2: Running the app:
+
+> yarn electron:serve
 ```
