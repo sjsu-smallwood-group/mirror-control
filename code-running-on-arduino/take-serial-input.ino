@@ -38,7 +38,7 @@ void do_steps(int dir, long &current_pos, int step_pin, int dir_pin) {
 void loop()
 {
   if (Serial.available() > 0) {
-    int in = Serial.read();
+    int in = Serial.read(); // This will get value like  0,0,1,0
     do_steps(1, current_posB, 11, 10); 
   }
 }
