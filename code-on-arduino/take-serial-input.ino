@@ -3,11 +3,11 @@ On the serial port the input data will come in the format 10,-2,3,4 basically 4 
 
 This code will seperate it into 4 values and then run a function on each value.
 
-The first value i.e. 10 is # of screw turns for Motor A X Axis in the clockwise direction.
-The second value i.e. -2 indicates 2 is # of screw turns for Motor A Y Axis in the anti clockwise direction.
+The first value i.e. 10 is # of screw turns for Motor A Channel B in the clockwise direction.
+The second value i.e. -2 indicates 2 is # of screw turns for Channel C in the anti clockwise direction.
 
-The third value i.e. 3 indicates 3 is # of screw turns for Motor B X Axis in the clockwise direction.
-The fourth value i.e. 4 indicates 4 is # of screw turns for Motor B Y Axis in the anti clockwise direction.
+The third value i.e. 3 indicates 3 is # of screw turns for Motor B Channel B in the clockwise direction.
+The fourth value i.e. 4 indicates 4 is # of screw turns for Motor B Channel C in the anti clockwise direction.
 
 So there are 4 kinds of screw turns. 2 for Motor A (X and Y Axis) and 2 for Motor B (X and Y axis)
 
@@ -68,6 +68,8 @@ void do_steps(int turns, int step_pin, int dir_pin) {
   else if(turns == 0)
     return;
   
+  turns = abs(turns);  // always use the absolute value of turns
+
   for(int n = 0; n < turns; n++) {
     digitalWrite(step_pin, 1);
     delay(1);
