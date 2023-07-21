@@ -24,7 +24,7 @@
 
 <script>
 import sqlite3 from 'sqlite3';
-const db = new sqlite3.Database('./experiments.sqlite');
+const db = new sqlite3.Database('./experiment-diary.sqlite');
 console.log(db)
 
 export default {
@@ -78,15 +78,15 @@ export default {
 
         db.get(selectLastRowSql, (err, row) => {
           if (row) {
-            this.sliders.MotorA.x = row.motorA_X;
-            this.sliders.MotorA.y = row.motorA_Y;
-            this.sliders.MotorB.x = row.motorB_X;
-            this.sliders.MotorB.y = row.motorB_Y;
+            this.sliders.MotorA.x = row.motorA_abs_X;
+            this.sliders.MotorA.y = row.motorA_abs_Y;
+            this.sliders.MotorB.x = row.motorB_abs_X;
+            this.sliders.MotorB.y = row.motorB_abs_Y;
             
-            this.initialSliders.MotorA.x = row.motorA_X;
-            this.initialSliders.MotorA.y = row.motorA_Y;
-            this.initialSliders.MotorB.x = row.motorB_X;
-            this.initialSliders.MotorB.y = row.motorB_Y;
+            this.initialSliders.MotorA.x = row.motorA_abs_X;
+            this.initialSliders.MotorA.y = row.motorA_abs_Y;
+            this.initialSliders.MotorB.x = row.motorB_abs_X;
+            this.initialSliders.MotorB.y = row.motorB_abs_Y;
           }
         });
     },
@@ -96,7 +96,7 @@ export default {
         const { x: motorA_X, y: motorA_Y } = this.sliders.MotorA;
         const { x: motorB_X, y: motorB_Y } = this.sliders.MotorB;
 
-        const insertRowSql = `INSERT INTO sliders(dateTimeUpdated, motorA_X, motorA_Y, motorB_X, motorB_Y) VALUES('${dateTimeUpdated}', ${motorA_X}, ${motorA_Y}, ${motorB_X}, ${motorB_Y})`;
+        const insertRowSql = `INSERT INTO sliders(dateTimeUpdated, motorA_abs_X, motorA_abs_Y, motorB_abs_X, motorB_abs_Y) VALUES('${dateTimeUpdated}', ${motorA_X}, ${motorA_Y}, ${motorB_X}, ${motorB_Y})`;
 
         console.log(insertRowSql);
 
