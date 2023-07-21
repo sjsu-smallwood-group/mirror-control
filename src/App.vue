@@ -23,8 +23,9 @@
 </template>
 
 <script>
-import fs from 'fs'
-const path = './slider-values.json';
+import sqlite3 from 'sqlite3';
+const db = new sqlite3.Database('./experiments.sqlite');
+console.log(db)
 
 export default {
   data() {
@@ -69,18 +70,46 @@ export default {
       
       this.saveSliders();
     },
+    
     initSliders() {
-      if (fs.existsSync(path)) {
-        const data = fs.readFileSync(path, 'utf8');
-        this.sliders = JSON.parse(data);
-        this.initialSliders = JSON.parse(data);
-      }
+      const selectLastRowSql = "SELECT * FROM sliders ORDER BY dateTimeUpdated DESC LIMIT 1";
+
+        console.log(selectLastRowSql);
+
+        db.get(selectLastRowSql, (err, row) => {
+          if (row) {
+            this.sliders.MotorA.x = row.motorA_X;
+            this.sliders.MotorA.y = row.motorA_Y;
+            this.sliders.MotorB.x = row.motorB_X;
+            this.sliders.MotorB.y = row.motorB_Y;
+            
+            this.initialSliders.MotorA.x = row.motorA_X;
+            this.initialSliders.MotorA.y = row.motorA_Y;
+            this.initialSliders.MotorB.x = row.motorB_X;
+            this.initialSliders.MotorB.y = row.motorB_Y;
+          }
+        });
     },
+    
     saveSliders() {
-      console.log('writing')
-      const data = JSON.stringify(this.sliders);
-      fs.writeFileSync(path, data);
+      const dateTimeUpdated = new Date().toISOString();
+        const { x: motorA_X, y: motorA_Y } = this.sliders.MotorA;
+        const { x: motorB_X, y: motorB_Y } = this.sliders.MotorB;
+
+        const insertRowSql = `INSERT INTO sliders(dateTimeUpdated, motorA_X, motorA_Y, motorB_X, motorB_Y) VALUES('${dateTimeUpdated}', ${motorA_X}, ${motorA_Y}, ${motorB_X}, ${motorB_Y})`;
+
+        console.log(insertRowSql);
+
+        db.run(
+          insertRowSql,
+          (err) => {
+            if (err) {
+              console.error(err.message);
+            }
+          }
+        );    
     },
+       
     showHelpMessage(newMessage) {
       this.helpMessage = newMessage;
       this.dBoolShowHelpMessage = true;
