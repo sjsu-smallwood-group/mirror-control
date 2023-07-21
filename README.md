@@ -9,6 +9,8 @@ Subsystem1: Run gui
 Subsystem2: Run serial-port-communicator
 Subsystem3: Run code-on-arduino
 
+> ./run-gui-serial-port-com.sh
+
 ## System diagram
 
 ```
