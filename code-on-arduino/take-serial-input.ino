@@ -80,18 +80,20 @@ void do_steps(int turns, int step_pin, int dir_pin) {
 
 void loop()
 {
-  if (Serial.available() > 0) {
-    String incomingString = Serial.readStringUntil('\n'); // read the incoming data as a string until newline
-    incomingString.trim(); // remove any leading/trailing whitespace
+    if (Serial.available() > 0) {
+        String incomingString = Serial.readStringUntil('\n'); // read the incoming data as string until newline
+        incomingString.trim(); // remove any leading/trailing whitespace
 
-    // Split the incoming string by commas into an array
-    int incomingData[4];
-    int index = 0;
-    for (int i = 0; i < incomingString.length(); i++) {
-      if (incomingString[i] == ',') {
+        // Split the incoming string by commas into an array
+        int incomingData[4];
+        int index = 0;
+        int lastCommaIndex = 0;
+
+        for (int i = 0; i < incomingString.length(); i++) {
+      if (incomingString[i] == ',' || (i == incomingString.length() - 1 && incomingString[i] != ',')) {
+        incomingData[index] = incomingString.substring(lastCommaIndex, i + (incomingString[i] != ',' ? 1 : 0)).toInt();
         index++;
-      } else {
-        incomingData[index] = incomingData[index] * 10 + (incomingString[i] - '0');
+        lastCommaIndex = i + 1;
       }
     }
 
