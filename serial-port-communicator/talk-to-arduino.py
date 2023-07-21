@@ -26,6 +26,9 @@ cursor.execute(
     last_motorB_abs_Y,
 ) = cursor.fetchone()
 
+print(
+    "Starting to watch the data pipeline (experimental-results.sqlite) for new row inserts..."
+)
 while True:
     # get the last row's ID
     cursor.execute("SELECT MAX(id) FROM sliders")
