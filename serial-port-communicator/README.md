@@ -1,1 +1,1 @@
-pip install sqlite3 pyserial watchdog
+pip3 install pyserial watchdog

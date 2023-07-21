@@ -1,5 +1,3 @@
-![Screenshot of app](./screenshot-of-app.png)
-
 # How to run this app on mac?
 
 This app has been tested on node version 16

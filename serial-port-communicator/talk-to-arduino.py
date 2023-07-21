@@ -9,7 +9,7 @@ port = "/dev/ttyACM0"  # replace with your Arduino's port
 baud_rate = 9600
 
 # SQLite settings
-db_path = "./experiments.sqlite"
+db_path = "../experimental-results.sqlite"
 table_name = "sliders"
 
 # Watchdog settings
@@ -23,6 +23,7 @@ last_id_processed = 0
 
 
 def on_modified(event):
+    print("File modified: ", event.src_path)
     global last_id_processed
 
     # Connect to the SQLite database
@@ -50,6 +51,7 @@ def on_modified(event):
 
         # Send the data to the Arduino
         message = f"{motor_a_x},{motor_a_y},{motor_b_x},{motor_b_y}\n"
+        print("Sending message to Arduino: ", message)  # add this line
         ser.write(message.encode())
 
         # Close the serial connection
