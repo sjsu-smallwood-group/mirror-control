@@ -39,10 +39,17 @@ void setup()
   }
 
   // set the motor control pins as outputs
-  pinMode(motorA_step_pin, OUTPUT); 
-  pinMode(motorA_dir_pin, OUTPUT); 
-  pinMode(motorB_step_pin, OUTPUT); 
-  pinMode(motorB_dir_pin, OUTPUT); 
+  pinMode(motorA_X_step_pin, OUTPUT); 
+  pinMode(motorA_X_dir_pin, OUTPUT); 
+  pinMode(motorA_Y_step_pin, OUTPUT); 
+  pinMode(motorA_Y_dir_pin, OUTPUT); 
+  
+  
+  pinMode(motorB_X_step_pin, OUTPUT); 
+  pinMode(motorB_X_dir_pin, OUTPUT); 
+  pinMode(motorB_Y_step_pin, OUTPUT); 
+  pinMode(motorB_Y_dir_pin, OUTPUT); 
+  
 }
 
 void do_steps(int turns, int step_pin, int dir_pin) {
