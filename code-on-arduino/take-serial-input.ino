@@ -3,20 +3,20 @@ On the serial port the input data will come in the format 10,2,3,4 basically 4 c
 
 This code will seperate it into 4 values and then run a function on each value.
 
-The first value is # of screw turns for Driver A X Axis
-The second value is # of screw turns for Driver A Y Axis
+The first value is # of screw turns for Motor A X Axis
+The second value is # of screw turns for Motor A Y Axis
 
-The third value is # of screw turns for Driver B X Axis
-The fourth value is # of screw turns for Driver B Y Axis
+The third value is # of screw turns for Motor B X Axis
+The fourth value is # of screw turns for Motor B Y Axis
 
-So there are 4 kinds of screw turns. 2 for driver A (X and Y Axis) and 2 for Driver B (X and Y axis)
+So there are 4 kinds of screw turns. 2 for Motor A (X and Y Axis) and 2 for Motor B (X and Y axis)
 */
 
 // Motor control pins
-int motorB_step_pin = 11; // B step pin
-int motorB_dir_pin = 10; // B direction pin
-int motorC_step_pin = 9; // C step pin
-int motorC_dir_pin = 8; // C direction pin
+int motorA_step_pin = 11; // B step pin
+int motorA_dir_pin = 10; // B direction pin
+int motorB_step_pin = 9; // C step pin
+int motorB_dir_pin = 8; // C direction pin
 
 void setup()
 {
@@ -27,10 +27,10 @@ void setup()
   }
 
   // set the motor control pins as outputs
+  pinMode(motorA_step_pin, OUTPUT); 
+  pinMode(motorA_dir_pin, OUTPUT); 
   pinMode(motorB_step_pin, OUTPUT); 
   pinMode(motorB_dir_pin, OUTPUT); 
-  pinMode(motorC_step_pin, OUTPUT); 
-  pinMode(motorC_dir_pin, OUTPUT); 
 }
 
 void do_steps(int dir, int turns, int step_pin, int dir_pin) {
@@ -60,16 +60,16 @@ void loop()
       }
     }
 
-    // Extract the number of turns for each driver and axis
-    int driverA_X_turns = incomingData[0];
-    int driverA_Y_turns = incomingData[1];
-    int driverB_X_turns = incomingData[2];
-    int driverB_Y_turns = incomingData[3];
+    // Extract the number of turns for each Motor and axis
+    int motorA_X_turns = incomingData[0];
+    int motorA_Y_turns = incomingData[1];
+    int motorB_X_turns = incomingData[2];
+    int motorB_Y_turns = incomingData[3];
 
-    // Execute steps based on the number of turns for each driver and axis
-    do_steps(1, driverA_X_turns, motorB_step_pin, motorB_dir_pin);
-    do_steps(1, driverA_Y_turns, motorC_step_pin, motorC_dir_pin);
-    do_steps(1, driverB_X_turns, motorB_step_pin, motorB_dir_pin);
-    do_steps(1, driverB_Y_turns, motorC_step_pin, motorC_dir_pin);
+    // Execute steps based on the number of turns for each Motor and axis
+    do_steps(1, motorA_X_turns, motorA_step_pin, motorA_dir_pin);
+    do_steps(1, motorA_Y_turns, motorB_step_pin, motorB_dir_pin);
+    do_steps(1, motorB_X_turns, motorA_step_pin, motorA_dir_pin);
+    do_steps(1, motorB_Y_turns, motorB_step_pin, motorB_dir_pin);
   }
 }
