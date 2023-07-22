@@ -61,15 +61,31 @@ export default {
   methods: {
     sendToArduino() {
      
-      this.showHelpMessage(`Arduino told to turn screws: \n
-    <b>Motor A:</b> X: ${this.colorNumber(this.sliders.MotorA.x - this.initialSliders.MotorA.x)}, 
-    Y: ${this.colorNumber(this.sliders.MotorA.y - this.initialSliders.MotorA.y)} \n
-    <b>Motor B:</b> X: ${this.colorNumber(this.sliders.MotorB.x - this.initialSliders.MotorB.x)}, 
-    Y: ${this.colorNumber(this.sliders.MotorB.y - this.initialSliders.MotorB.y)}`); 
-      
-      
+      let helpMessage = 'Arduino told to turn screws: \n';
+
+      // Check if each value is non-zero before adding it to the help message
+      if (this.sliders.MotorA.x - this.initialSliders.MotorA.x !== 0) {
+        helpMessage += `<b>Motor A:</b> X: ${this.colorNumber(this.sliders.MotorA.x - this.initialSliders.MotorA.x)}\n`;
+      }
+      if (this.sliders.MotorA.y - this.initialSliders.MotorA.y !== 0) {
+        helpMessage += `<b>Motor A:</b> Y: ${this.colorNumber(this.sliders.MotorA.y - this.initialSliders.MotorA.y)}\n`;
+      }
+      if (this.sliders.MotorB.x - this.initialSliders.MotorB.x !== 0) {
+        helpMessage += `<b>Motor B:</b> X: ${this.colorNumber(this.sliders.MotorB.x - this.initialSliders.MotorB.x)}\n`;
+      }
+      if (this.sliders.MotorB.y - this.initialSliders.MotorB.y !== 0) {
+        helpMessage += `<b>Motor B:</b> Y: ${this.colorNumber(this.sliders.MotorB.y - this.initialSliders.MotorB.y)}\n`;
+      }
+
+      // Display the help message, if it has any non-zero values
+      if (helpMessage !== 'Arduino told to turn screws: \n') {
+        this.showHelpMessage(helpMessage); 
+      }
+          
       this.saveSliders();
     },
+
+
     
     initSliders() {
       const selectLastRowSql = "SELECT * FROM sliders ORDER BY dateTimeUpdated DESC LIMIT 1";
