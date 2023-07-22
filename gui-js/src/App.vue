@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Dual Mirror Synchronization System</h1>
     <div class="motor-wrapper">
-      <div class="motor" v-for="motor in [{id:'MotorA', name: 'Motor A'}, {id:'MotorB', name: 'Motor B'}]" :key="motor.id">
+      <div class="motor" v-for="motor in [{id:'Motor1', name: 'Motor 1'}, {id:'Motor2', name: 'Motor 2'}]" :key="motor.id">
     <h2>{{ motor.name }}</h2>
     <div class="axis-wrapper">
       <div class="axis x-axis">
@@ -31,21 +31,21 @@ export default {
   data() {
     return {
       sliders: {
-        MotorA: {
+        Motor1: {
           x: 0,
           y: 0
         },
-        MotorB: {
+        Motor2: {
           x: 0,
           y: 0
         }
       },
       initialSliders: {
-        MotorA: {
+        Motor1: {
           x: 0,
           y: 0
         },
-        MotorB: {
+        Motor2: {
           x: 0,
           y: 0
         }
@@ -64,17 +64,17 @@ export default {
       let helpMessage = 'Arduino told to turn screws: \n';
 
       // Check if each value is non-zero before adding it to the help message
-      if (this.sliders.MotorA.x - this.initialSliders.MotorA.x !== 0) {
-        helpMessage += `<b>Motor A:</b> X: ${this.colorNumber(this.sliders.MotorA.x - this.initialSliders.MotorA.x)}\n`;
+      if (this.sliders.Motor1.x - this.initialSliders.Motor1.x !== 0) {
+        helpMessage += `<b>Motor 1:</b> X: ${this.colorNumber(this.sliders.Motor1.x - this.initialSliders.Motor1.x)}\n`;
       }
-      if (this.sliders.MotorA.y - this.initialSliders.MotorA.y !== 0) {
-        helpMessage += `<b>Motor A:</b> Y: ${this.colorNumber(this.sliders.MotorA.y - this.initialSliders.MotorA.y)}\n`;
+      if (this.sliders.Motor1.y - this.initialSliders.Motor1.y !== 0) {
+        helpMessage += `<b>Motor 1:</b> Y: ${this.colorNumber(this.sliders.Motor1.y - this.initialSliders.Motor1.y)}\n`;
       }
-      if (this.sliders.MotorB.x - this.initialSliders.MotorB.x !== 0) {
-        helpMessage += `<b>Motor B:</b> X: ${this.colorNumber(this.sliders.MotorB.x - this.initialSliders.MotorB.x)}\n`;
+      if (this.sliders.Motor2.x - this.initialSliders.Motor2.x !== 0) {
+        helpMessage += `<b>Motor 2:</b> X: ${this.colorNumber(this.sliders.Motor2.x - this.initialSliders.Motor2.x)}\n`;
       }
-      if (this.sliders.MotorB.y - this.initialSliders.MotorB.y !== 0) {
-        helpMessage += `<b>Motor B:</b> Y: ${this.colorNumber(this.sliders.MotorB.y - this.initialSliders.MotorB.y)}\n`;
+      if (this.sliders.Motor2.y - this.initialSliders.Motor2.y !== 0) {
+        helpMessage += `<b>Motor 2:</b> Y: ${this.colorNumber(this.sliders.Motor2.y - this.initialSliders.Motor2.y)}\n`;
       }
 
       // Display the help message, if it has any non-zero values
@@ -93,26 +93,27 @@ export default {
         console.log(selectLastRowSql);
 
         db.get(selectLastRowSql, (err, row) => {
+          console.log(row);
           if (row) {
-            this.sliders.MotorA.x = row.motorA_abs_X;
-            this.sliders.MotorA.y = row.motorA_abs_Y;
-            this.sliders.MotorB.x = row.motorB_abs_X;
-            this.sliders.MotorB.y = row.motorB_abs_Y;
+            this.sliders.Motor1.x = row.motor1_abs_X;
+            this.sliders.Motor1.y = row.motor1_abs_Y;
+            this.sliders.Motor2.x = row.motor2_abs_X;
+            this.sliders.Motor2.y = row.motor2_abs_Y;
             
-            this.initialSliders.MotorA.x = row.motorA_abs_X;
-            this.initialSliders.MotorA.y = row.motorA_abs_Y;
-            this.initialSliders.MotorB.x = row.motorB_abs_X;
-            this.initialSliders.MotorB.y = row.motorB_abs_Y;
+            this.initialSliders.Motor1.x = row.motor1_abs_X;
+            this.initialSliders.Motor1.y = row.motor1_abs_Y;
+            this.initialSliders.Motor2.x = row.motor2_abs_X;
+            this.initialSliders.Motor2.y = row.motor2_abs_Y;
           }
         });
     },
     
     saveSliders() {
       const dateTimeUpdated = new Date().toISOString();
-        const { x: motorA_X, y: motorA_Y } = this.sliders.MotorA;
-        const { x: motorB_X, y: motorB_Y } = this.sliders.MotorB;
+        const { x: Motor1_X, y: Motor1_Y } = this.sliders.Motor1;
+        const { x: Motor2_X, y: Motor2_Y } = this.sliders.Motor2;
 
-        const insertRowSql = `INSERT INTO sliders(dateTimeUpdated, motorA_abs_X, motorA_abs_Y, motorB_abs_X, motorB_abs_Y) VALUES('${dateTimeUpdated}', ${motorA_X}, ${motorA_Y}, ${motorB_X}, ${motorB_Y})`;
+        const insertRowSql = `INSERT INTO sliders(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y})`;
 
         console.log(insertRowSql);
 
