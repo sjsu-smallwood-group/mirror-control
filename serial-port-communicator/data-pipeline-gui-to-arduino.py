@@ -16,14 +16,14 @@ cursor = conn.cursor()
 
 # initialize the last seen ID and motor values
 cursor.execute(
-    "SELECT MAX(id), Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y FROM sliders"
+    "SELECT MAX(id), motor1_abs_X, motor1_abs_Y, motor2_abs_X, motor2_abs_Y FROM sliders"
 )
 (
     last_id,
-    last_Motor1_abs_X,
-    last_Motor1_abs_Y,
-    last_Motor2_abs_X,
-    last_Motor2_abs_Y,
+    last_motor1_abs_X,
+    last_motor1_abs_Y,
+    last_motor2_abs_X,
+    last_motor2_abs_Y,
 ) = cursor.fetchone()
 
 print(
@@ -49,20 +49,20 @@ while True:
         row_dict = dict(zip(column_names, row_data))
 
         # calculate deltas
-        Motor1_delta_X = row_dict["Motor1_abs_X"] - last_Motor1_abs_X
-        Motor1_delta_Y = row_dict["Motor1_abs_Y"] - last_Motor1_abs_Y
-        Motor2_delta_X = row_dict["Motor2_abs_X"] - last_Motor2_abs_X
-        Motor2_delta_Y = row_dict["Motor2_abs_Y"] - last_Motor2_abs_Y
+        motor1_delta_X = row_dict["motor1_abs_X"] - last_motor1_abs_X
+        motor1_delta_Y = row_dict["motor1_abs_Y"] - last_motor1_abs_Y
+        motor2_delta_X = row_dict["motor2_abs_X"] - last_motor2_abs_X
+        motor2_delta_Y = row_dict["motor2_abs_Y"] - last_motor2_abs_Y
 
         # update last motor values
-        last_Motor1_abs_X = row_dict["Motor1_abs_X"]
-        last_Motor1_abs_Y = row_dict["Motor1_abs_Y"]
-        last_Motor2_abs_X = row_dict["Motor2_abs_X"]
-        last_Motor2_abs_Y = row_dict["Motor2_abs_Y"]
+        last_motor1_abs_X = row_dict["motor1_abs_X"]
+        last_motor1_abs_Y = row_dict["motor1_abs_Y"]
+        last_motor2_abs_X = row_dict["motor2_abs_X"]
+        last_motor2_abs_Y = row_dict["motor2_abs_Y"]
 
         # Send the data to the Arduino
         message = (
-            f"{Motor1_delta_X},{Motor1_delta_Y},{Motor2_delta_X},{Motor2_delta_Y}\n"
+            f"{motor1_delta_X},{motor1_delta_Y},{motor2_delta_X},{motor2_delta_Y}\n"
         )
 
         print(message)
