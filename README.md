@@ -41,6 +41,26 @@ Subsystem3: Run code-on-arduino
 
 # How to view the experimental logs?
 
-Install https://sqlitebrowser.org/dl/
-And then open the file experimental-results.sqlite
-Catch up knowledge is at: https://www.youtube.com/watch?v=b0Dplx4M5zg
+1. Install https://sqlitebrowser.org/dl/
+
+2. Then open the file experimental-results.sqlite inside the db browser app.
+
+3. Catch up knowledge is at: https://www.youtube.com/watch?v=b0Dplx4M5zg
+
+# What are the column names in the experimental log book?
+
+```
+CREATE TABLE sliders(
+    id INTEGER PRIMARY KEY,
+    experiementRanBy TEXT,
+	dateTimeUpdated TEXT,
+    motor1_abs_X INTEGER,
+	motor1_abs_Y INTEGER,
+    motor2_abs_X INTEGER,
+    motor2_abs_Y INTEGER,
+    material TEXT,
+	temperature_kelvin TEXT,
+	notes TEXT,
+	image BLOB
+  )
+```
