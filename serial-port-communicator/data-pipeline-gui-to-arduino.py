@@ -8,7 +8,7 @@ baud_rate = 9600
 
 # SQLite settings
 db_path = "../experiments-notebook.sqlite"
-table_name = "sliders"
+table_name = "observations"
 
 # connect to the database
 conn = sqlite3.connect(db_path)
@@ -16,7 +16,7 @@ cursor = conn.cursor()
 
 # initialize the last seen ID and motor values
 cursor.execute(
-    "SELECT MAX(id), motor1_abs_X, motor1_abs_Y, motor2_abs_X, motor2_abs_Y FROM sliders"
+    "SELECT MAX(id), motor1_abs_X, motor1_abs_Y, motor2_abs_X, motor2_abs_Y FROM tblObservations"
 )
 (
     last_id,
@@ -31,7 +31,7 @@ print(
 )
 while True:
     # get the last row's ID
-    cursor.execute("SELECT MAX(id) FROM sliders")
+    cursor.execute("SELECT MAX(id) FROM tblObservations")
     current_id = cursor.fetchone()[0]
 
     # check if there's a new row
@@ -39,7 +39,7 @@ while True:
         last_id = current_id
 
         # fetch the new row's data
-        cursor.execute("SELECT * FROM sliders WHERE id=?", (last_id,))
+        cursor.execute("SELECT * FROM tblObservations WHERE id=?", (last_id,))
         row_data = cursor.fetchone()
 
         # fetch the column names

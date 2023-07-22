@@ -50,7 +50,7 @@ Subsystem3: Run code-on-arduino
 # What are the column names in the experimental log book?
 
 ```
-CREATE TABLE sliders(
+CREATE TABLE tblObservations(
     id INTEGER PRIMARY KEY,
     experiementRanBy TEXT,
 	dateTimeUpdated TEXT,

@@ -88,7 +88,7 @@ export default {
 
     
     initSliders() {
-      const selectLastRowSql = "SELECT * FROM sliders ORDER BY dateTimeUpdated DESC LIMIT 1";
+      const selectLastRowSql = "SELECT * FROM tblObservations ORDER BY dateTimeUpdated DESC LIMIT 1";
 
         console.log(selectLastRowSql);
 
@@ -113,7 +113,7 @@ export default {
         const { x: Motor1_X, y: Motor1_Y } = this.sliders.Motor1;
         const { x: Motor2_X, y: Motor2_Y } = this.sliders.Motor2;
 
-        const insertRowSql = `INSERT INTO sliders(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y})`;
+        const insertRowSql = `INSERT INTO tblObservations(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y})`;
 
         console.log(insertRowSql);
 
