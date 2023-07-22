@@ -7,7 +7,7 @@ tmux new-session -d -s my_session
 tmux split-window -v
 
 # Run 'ls' command in the left pane (pane 0)
-tmux send-keys -t my_session:0.0 'cd gui; yarn electron:serve' C-m 
+tmux send-keys -t my_session:0.0 'cd gui-js; yarn electron:serve' C-m 
 
 # Run 'top' command in the right pane (pane 1)
 tmux send-keys -t my_session:0.1 'cd serial-port-communicator; python talk-to-arduino.py' C-m 
