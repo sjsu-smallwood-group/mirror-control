@@ -124,7 +124,12 @@ export default {
               console.error(err.message);
             }
           }
-        );    
+        );
+        // set the initial values to the current values
+        this.initialSliders.Motor1.x = Motor1_X;
+        this.initialSliders.Motor1.y = Motor1_Y;
+        this.initialSliders.Motor2.x = Motor2_X;
+        this.initialSliders.Motor2.y = Motor2_Y;    
     },
        
     showHelpMessage(newMessage) {
