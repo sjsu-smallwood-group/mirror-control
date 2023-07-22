@@ -13,4 +13,4 @@ Run the program:
 > python3 data-pipeline-gui-to-arduino.py
 
 Q3) How does this get data from gui?
-It uses the experimental-results.sqlite as a data pipe. So when the GUI writes data to experimental-results.sqlite, this program reads it and sends it to the arduino.
+It uses the experiments-notebook.sqlite as a data pipe. So when the GUI writes data to experiments-notebook.sqlite, this program reads it and sends it to the arduino.

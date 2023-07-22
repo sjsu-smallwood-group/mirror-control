@@ -24,7 +24,7 @@
 
 <script>
 import sqlite3 from 'sqlite3';
-const db = new sqlite3.Database('../experimental-results.sqlite');
+const db = new sqlite3.Database('../experiments-notebook.sqlite');
 console.log(db)
 
 export default {

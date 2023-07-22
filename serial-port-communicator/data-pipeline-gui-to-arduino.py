@@ -7,7 +7,7 @@ port = "/dev/ttyACM0"  # replace with your Arduino's port
 baud_rate = 9600
 
 # SQLite settings
-db_path = "../experimental-results.sqlite"
+db_path = "../experiments-notebook.sqlite"
 table_name = "sliders"
 
 # connect to the database
@@ -27,7 +27,7 @@ cursor.execute(
 ) = cursor.fetchone()
 
 print(
-    "Starting to watch the data pipeline (experimental-results.sqlite) for new row inserts..."
+    "Starting to watch the data pipeline (experiments-notebook.sqlite) for new row inserts..."
 )
 while True:
     # get the last row's ID

@@ -43,7 +43,7 @@ Subsystem3: Run code-on-arduino
 
 1. Install https://sqlitebrowser.org/dl/
 
-2. Then open the file experimental-results.sqlite inside the db browser app.
+2. Then open the file experiments-notebook.sqlite inside the db browser app.
 
 3. Catch up knowledge is at: https://www.youtube.com/watch?v=b0Dplx4M5zg
 
