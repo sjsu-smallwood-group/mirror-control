@@ -52,15 +52,15 @@ Subsystem3: Run code-on-arduino
 ```
 CREATE TABLE tblObservations(
     id INTEGER PRIMARY KEY,
+    material TEXT,
     experiementRanBy TEXT,
+	temperature_kelvin TEXT,
 	dateTimeUpdated TEXT,
     motor1_abs_X INTEGER,
 	motor1_abs_Y INTEGER,
     motor2_abs_X INTEGER,
     motor2_abs_Y INTEGER,
-    material TEXT,
-	temperature_kelvin TEXT,
-	notes TEXT,
+    notes TEXT,
 	image BLOB
   )
 ```
