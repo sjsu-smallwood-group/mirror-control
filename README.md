@@ -38,3 +38,9 @@ Subsystem3: Run code-on-arduino
                                               | Model: 8801  |         |              |
                                               +--------------+         +--------------+
 ```
+
+# How to view the experimental logs?
+
+Install https://sqlitebrowser.org/dl/
+And then open the file experimental-results.sqlite
+Catch up knowledge is at: https://www.youtube.com/watch?v=b0Dplx4M5zg
