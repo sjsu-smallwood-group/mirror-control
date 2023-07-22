@@ -16,14 +16,14 @@ cursor = conn.cursor()
 
 # initialize the last seen ID and motor values
 cursor.execute(
-    "SELECT MAX(id), motorA_abs_X, motorA_abs_Y, motorB_abs_X, motorB_abs_Y FROM sliders"
+    "SELECT MAX(id), Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y FROM sliders"
 )
 (
     last_id,
-    last_motorA_abs_X,
-    last_motorA_abs_Y,
-    last_motorB_abs_X,
-    last_motorB_abs_Y,
+    last_Motor1_abs_X,
+    last_Motor1_abs_Y,
+    last_Motor2_abs_X,
+    last_Motor2_abs_Y,
 ) = cursor.fetchone()
 
 print(
@@ -49,24 +49,24 @@ while True:
         row_dict = dict(zip(column_names, row_data))
 
         # calculate deltas
-        motorA_delta_X = row_dict["motorA_abs_X"] - last_motorA_abs_X
-        motorA_delta_Y = row_dict["motorA_abs_Y"] - last_motorA_abs_Y
-        motorB_delta_X = row_dict["motorB_abs_X"] - last_motorB_abs_X
-        motorB_delta_Y = row_dict["motorB_abs_Y"] - last_motorB_abs_Y
+        Motor1_delta_X = row_dict["Motor1_abs_X"] - last_Motor1_abs_X
+        Motor1_delta_Y = row_dict["Motor1_abs_Y"] - last_Motor1_abs_Y
+        Motor2_delta_X = row_dict["Motor2_abs_X"] - last_Motor2_abs_X
+        Motor2_delta_Y = row_dict["Motor2_abs_Y"] - last_Motor2_abs_Y
 
         # update last motor values
-        last_motorA_abs_X = row_dict["motorA_abs_X"]
-        last_motorA_abs_Y = row_dict["motorA_abs_Y"]
-        last_motorB_abs_X = row_dict["motorB_abs_X"]
-        last_motorB_abs_Y = row_dict["motorB_abs_Y"]
+        last_Motor1_abs_X = row_dict["Motor1_abs_X"]
+        last_Motor1_abs_Y = row_dict["Motor1_abs_Y"]
+        last_Motor2_abs_X = row_dict["Motor2_abs_X"]
+        last_Motor2_abs_Y = row_dict["Motor2_abs_Y"]
 
         # Send the data to the Arduino
         message = (
-            f"{motorA_delta_X},{motorA_delta_Y},{motorB_delta_X},{motorB_delta_Y}\n"
+            f"{Motor1_delta_X},{Motor1_delta_Y},{Motor2_delta_X},{Motor2_delta_Y}\n"
         )
 
-        print(message);
-        
+        print(message)
+
         try:
             ser = serial.Serial(port, baud_rate)
             time.sleep(2)  # give the connection a second to settle
