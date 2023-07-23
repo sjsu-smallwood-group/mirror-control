@@ -15,7 +15,26 @@
       </div>
     </div>
    </div>
-    </div>
+   </div>
+   <div class="experiment-details">
+    <label>Experimenter:
+        <select v-model="experimentDetails.experimenter">
+            <option value="Hediye">Hediye</option>
+            <option value="Ayne">Ayne</option>
+            <option value="Prof. Smallwood">Prof. Smallwood</option>
+        </select>
+    </label>
+    <label>Element:
+        <select v-model="experimentDetails.element">
+            <option value="MoS2_on_SiO2">MoS2 on SiO2</option>
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+        </select>
+    </label>
+    <label>Temperature (K):
+        <input type="number" min="0" step="0.01" v-model="experimentDetails.temperature">
+    </label>
+</div>
     <button @click="sendToArduino">Send to Arduino</button>
     <p>&copy; 2023 Smallwood Research Group SJSU</p>
     <div class="help-message" v-if="dBoolShowHelpMessage" v-html="helpMessage"></div>
@@ -30,6 +49,7 @@ console.log(db)
 export default {
   data() {
     return {
+      
       sliders: {
         Motor1: {
           x: 0,
@@ -40,6 +60,11 @@ export default {
           y: 0
         }
       },
+        experimentDetails: {
+      experimenter: 'Hediye',  // default value
+      element: 'MoS2_on_SiO2',  // default value
+      temperature: 0
+    },
       initialSliders: {
         Motor1: {
           x: 0,
@@ -113,7 +138,10 @@ export default {
         const { x: Motor1_X, y: Motor1_Y } = this.sliders.Motor1;
         const { x: Motor2_X, y: Motor2_Y } = this.sliders.Motor2;
 
-        const insertRowSql = `INSERT INTO tblObservations(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y})`;
+        const insertRowSql = `INSERT INTO tblObservations(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y,material, experiementRanBy, temperature_kelvin) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y},
+      '${this.experimentDetails.element}',
+      '${this.experimentDetails.experimenter}',
+      ${this.experimentDetails.temperature})`;
 
         console.log(insertRowSql);
 
