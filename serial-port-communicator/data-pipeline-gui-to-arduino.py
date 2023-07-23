@@ -1,9 +1,16 @@
 import sqlite3
 import time
 import serial
+import json
+import os
+
+# Load configuration file
+config_file_path = os.path.join(os.path.dirname(__file__), "config.json")
+with open(config_file_path, "r") as f:
+    config = json.load(f)
 
 # Serial port settings
-port = "/dev/ttyACM0"  # replace with your Arduino's port
+port = config["port"]  # get port from configuration
 baud_rate = 9600
 
 # SQLite settings
@@ -26,9 +33,8 @@ cursor.execute(
     last_motor2_abs_Y,
 ) = cursor.fetchone()
 
-print(
-    "Starting to watch the data pipeline (experiments-notebook.sqlite) for new row inserts..."
-)
+print(port)
+print("Watching data pipeline (experiments-notebook.sqlite) for new row inserts...")
 while True:
     # get the last row's ID
     cursor.execute("SELECT MAX(id) FROM tblObservations")
