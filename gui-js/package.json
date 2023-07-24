@@ -13,7 +13,7 @@
   },
   "main": "src/background.js",
   "dependencies": {
-    "@electron/remote": "^1.0.2",
+    "@electron/remote": "^2.0.10",
     "bootstrap": "^5.0.0-beta1",
     "core-js": "^3.6.5",
     "sqlite3": "^5.1.6",
@@ -26,7 +26,7 @@
     "@vue/cli-service": "~5.0.8",
     "@vue/compiler-sfc": "^3.3.4",
     "@babel/eslint-parser": "7.22.9",
-    "electron": "12.0.0",
+    "electron": "25.3.1",
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^8.45.0",
     "eslint-plugin-vue": "^9.15.1",
