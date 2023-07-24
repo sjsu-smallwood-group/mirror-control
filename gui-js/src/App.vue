@@ -1,6 +1,28 @@
 <template>
   <div id="app">
-    <h1>Dual Mirror Synchronization System</h1>
+    <h2>PL Experiment Management System</h2>
+   <div class="experiment-details">
+    <label>&nbsp;&nbsp;&nbsp;Experimenter:
+        <select v-model="experimentDetails.experimenter">
+            <option value=""></option>
+            <option value="Hediye">Hediye</option>
+            <option value="Ayane">Ayane</option>
+            <option value="Edric">Edric</option>
+            <option value="Prof. Smallwood">Prof. Smallwood</option>
+        </select>
+    </label>
+    <label>&nbsp;&nbsp;&nbsp;Element:
+        <select v-model="experimentDetails.element">
+            <option value=""></option>
+            <option value="MoS2_on_SiO2">MoS2 on SiO2</option>
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+        </select>
+    </label>
+    <label>&nbsp;&nbsp;&nbsp;Temperature (K):
+        <input type="number" min="0" step="0.01" v-model="experimentDetails.temperature">
+    </label>
+</div>
     <div class="motor-wrapper">
       <div class="motor" v-for="motor in [{id:'Motor1', name: 'Motor 1'}, {id:'Motor2', name: 'Motor 2'}]" :key="motor.id">
     <h2>{{ motor.name }}</h2>
@@ -16,26 +38,7 @@
     </div>
    </div>
    </div>
-   <div class="experiment-details">
-    <label>Experimenter:
-        <select v-model="experimentDetails.experimenter">
-            <option value="Hediye">Hediye</option>
-            <option value="Ayne">Ayne</option>
-            <option value="Prof. Smallwood">Prof. Smallwood</option>
-        </select>
-    </label>
-    <label>Element:
-        <select v-model="experimentDetails.element">
-            <option value="MoS2_on_SiO2">MoS2 on SiO2</option>
-            <option value="silver">Silver</option>
-            <option value="gold">Gold</option>
-        </select>
-    </label>
-    <label>Temperature (K):
-        <input type="number" min="0" step="0.01" v-model="experimentDetails.temperature">
-    </label>
-</div>
-    <button @click="sendToArduino">Send to Arduino</button>
+    <button @click="sendToArduino">Send to experiement notebook</button>
     <p>&copy; 2023 Smallwood Research Group SJSU</p>
     <div class="help-message" v-if="dBoolShowHelpMessage" v-html="helpMessage"></div>
   </div>
@@ -61,8 +64,8 @@ export default {
         }
       },
         experimentDetails: {
-      experimenter: 'Hediye',  // default value
-      element: 'MoS2_on_SiO2',  // default value
+      experimenter: '',  // default value
+      element: '',  // default value
       temperature: 0
     },
       initialSliders: {
@@ -183,7 +186,7 @@ export default {
 </script>
 
 <style scoped>
-h1 {
+h2 {
   text-align: center;
 }
 

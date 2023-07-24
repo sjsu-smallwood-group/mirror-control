@@ -1,12 +1,18 @@
 'use strict'
 
 const { app, protocol, BrowserWindow } = require('electron');
-const { createProtocol } = require('vue-cli-plugin-electron-builder/lib');
-const { installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer');
 
-require('@electron/remote/main').initialize()
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+let installExtension, VUEJS_DEVTOOLS
+
+if (isDevelopment) {
+  const { createProtocol } = require('vue-cli-plugin-electron-builder/lib');
+  installExtension = require('electron-devtools-installer').default;
+  VUEJS_DEVTOOLS = require('electron-devtools-installer').VUEJS_DEVTOOLS;
+}
+
+require('@electron/remote/main').initialize()
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
@@ -19,8 +25,6 @@ async function createWindow() {
     width: 1000,
     height: 700,
     webPreferences: {
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true
