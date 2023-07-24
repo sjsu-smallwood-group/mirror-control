@@ -1,0 +1,84 @@
+Arguments: 
+  /Users/vk-tech/.local/share/nvm/v16.19.1/bin/node /usr/local/Cellar/yarn/1.22.19/libexec/bin/yarn.js electron:serve
+
+PATH: 
+  /Users/vk-tech/.local/share/nvm/v16.19.1/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/munki:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.19.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/vk-tech/Documents/ha/mirror-control/gui-js/package.json: Unexpected token } in JSON at position 1275
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:310:30)
+      at /usr/local/Cellar/yarn/1.22.19/libexec/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "mirror-management-system",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "serve": "vue-cli-service serve",
+      "build": "vue-cli-service build",
+      "lint": "vue-cli-service lint",
+      "electron:build": "vue-cli-service electron:build",
+      "electron:serve": "vue-cli-service electron:serve",
+      "postinstall": "electron-builder install-app-deps",
+      "postuninstall": "electron-builder install-app-deps"
+    },
+    "main": "background.js",
+    "dependencies": {
+      "@electron/remote": "^1.0.2",
+      "bootstrap": "^5.0.0-beta1",
+      "core-js": "^3.6.5",
+      "sqlite3": "^5.1.6",
+      "vue": "^3.3.4",
+      "yarn": "^1.22.19"
+    },
+    "devDependencies": {
+      "@vue/cli-plugin-babel": "~5.0.8",
+      "@vue/cli-plugin-eslint": "~5.0.8",
+      "@vue/cli-service": "~5.0.8",
+      "@vue/compiler-sfc": "^3.3.4",
+      "@babel/eslint-parser": "7.22.9",
+      "electron": "11.0.0",
+      "electron-devtools-installer": "^3.1.0",
+      "eslint": "^8.45.0",
+      "eslint-plugin-vue": "^9.15.1",
+      "vue-cli-plugin-electron-builder": "~2.0.0"
+    },
+    "eslintConfig": {
+      "root": true,
+      "env": {
+        "node": true
+      },
+      "extends": [
+        "plugin:vue/vue3-essential",
+        "eslint:recommended"
+      ],
+      "parserOptions": {
+        "parser": "@babel/eslint-parser",
+      },
+      "rules": {}
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions",
+      "not dead"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
