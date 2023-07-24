@@ -1,6 +1,8 @@
 This system will create an experimental log that looks like this:
 
 ![Screenshot of end goal](./docs/experimental-log-on-7-22-2023.png)
+<img width="1669" alt="experiment-log-on7-24" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/b5dbb40e-aa54-4c36-bbf5-e9121390c89c">
+
 
 The app controlling the mirrors look like this:
 
