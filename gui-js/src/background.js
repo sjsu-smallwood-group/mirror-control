@@ -1,16 +1,9 @@
 'use strict'
 
 const { app, protocol, BrowserWindow } = require('electron');
-
+const path = require('path');
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-let installExtension, VUEJS_DEVTOOLS
-
-if (isDevelopment) {
-  const { createProtocol } = require('vue-cli-plugin-electron-builder/lib');
-  installExtension = require('electron-devtools-installer').default;
-  VUEJS_DEVTOOLS = require('electron-devtools-installer').VUEJS_DEVTOOLS;
-}
 
 require('@electron/remote/main').initialize()
 
@@ -22,8 +15,8 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1000,
-    height: 700,
+    width: 800,
+    height: 600,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -34,14 +27,26 @@ async function createWindow() {
   // Set the window title
   win.setTitle('Temperature dependent photoluminescence');
 
-  if (process.env.WEBPACK_DEV_SERVER_URL) {
+  if (isDevelopment) {
+    const { createProtocol } = require('vue-cli-plugin-electron-builder/lib');
+    const installExtension = require('electron-devtools-installer').default;
+    const VUEJS_DEVTOOLS = require('electron-devtools-installer').VUEJS_DEVTOOLS;
+
+    createProtocol('app')
+
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     if (!process.env.IS_TEST) win.webContents.openDevTools()
+
+    // Install Vue Devtools
+    try {
+      await installExtension(VUEJS_DEVTOOLS)
+    } catch (e) {
+      console.error('Vue Devtools failed to install:', e.toString())
+    }
   } else {
-    createProtocol('app')
     // Load the index.html when not in development
-    win.loadURL('app://./index.html')
+    win.loadURL(`file://${path.join(__dirname, '../public/index.html')}`)
   }
 }
 
@@ -60,20 +65,7 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', async () => {
-  if (isDevelopment && !process.env.IS_TEST) {
-    // Install Vue Devtools
-    try {
-      await installExtension(VUEJS_DEVTOOLS)
-    } catch (e) {
-      console.error('Vue Devtools failed to install:', e.toString())
-    }
-  }
-  createWindow()
-})
+app.on('ready', createWindow)
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
