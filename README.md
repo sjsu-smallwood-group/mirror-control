@@ -1,4 +1,4 @@
-This system will create experimental log that look like this:
+This system will create an experimental log that looks like this:
 
 ![Screenshot of end goal](./docs/experimental-log-on-7-22-2023.png)
 
