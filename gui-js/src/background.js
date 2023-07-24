@@ -1,8 +1,8 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
-import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+const { app, protocol, BrowserWindow } = require('electron');
+const { createProtocol } = require('vue-cli-plugin-electron-builder/lib');
+const { installExtension, VUEJS_DEVTOOLS } = require('electron-devtools-installer');
 
 require('@electron/remote/main').initialize()
 
