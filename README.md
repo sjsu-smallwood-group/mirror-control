@@ -42,13 +42,13 @@ Subsystem3: Run code-on-arduino
 
 ```
 +-----------+   USB   +------------+   Wires  +--------------+         +--------------+
-| Computer  | <-----> | Arduino UNO| <------> | Mirror Driver| <------>|    Mirror    |
+| Computer  | <-----> | Arduino UNO| <------> |Mirror DriverA| <------>|    Mirror 1  |
 |           |         |            |          | Picomotor    |         |              |
 | running   |         | running    |          | Model: 8801  |         |              |
 |           |         |            |          +--------------+         +--------------+
 | electron  |         | take-      |
 | gui       |         | serial-    |   Wires  +--------------+         +--------------+
-|           |         | input.ino  | <------> | Mirror Driver| <------>|    Mirror    |
+|           |         | input.ino  | <------> |Mirror DriverB| <------>|    Mirror 2  |
 +-----------+         +------------+          | Picomotor    |         |              |
                                               | Model: 8801  |         |              |
                                               +--------------+         +--------------+
