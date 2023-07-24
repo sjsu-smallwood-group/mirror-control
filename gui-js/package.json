@@ -1,6 +1,6 @@
 {
-  "name": "vue-electron",
-  "version": "0.1.0",
+  "name": "mirror-management-system",
+  "version": "2023-07-23",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
