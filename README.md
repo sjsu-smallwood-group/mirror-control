@@ -14,15 +14,15 @@ Picture of the connections between the computer to the Ardunio Uno R3, picomotor
 
 ![IMG_4082](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/c6e1829e-dca0-4064-a9f5-e585cf6e8f29)
 
+The arduino controlling the mirrors looks like this:
+![Picture of the arduino controlling the mirrors](./docs/arduino-controlling-the-mirrors.jpg)
+
 
 Circuit diagram for controlling 2 picomotors using Arduino Uno R3 (Digital):
 
 ![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/d7448798-93df-4d9a-9819-427505eec2f7)
 
 
-
-The arduino controlling the mirrors looks like this:
-![Picture of the arduino controlling the mirrors](./docs/arduino-controlling-the-mirrors.jpg)
 
 # How to run this app on mac?
 
