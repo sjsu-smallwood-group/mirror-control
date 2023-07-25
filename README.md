@@ -10,6 +10,11 @@ The lab setup looks like this:
 
 <img width="920" alt="Screenshot 2023-07-24 at 7 16 27 PM" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/bbcef07f-68bb-4049-a933-76ff2e0a2819">
 
+Picture of the connections between the computer to the Ardunio Uno R3, picomotor driver A and B, and mirror 1 and 2:
+
+![IMG_4082](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/c6e1829e-dca0-4064-a9f5-e585cf6e8f29)
+
+
 Circuit diagram for controlling 2 picomotors using Arduino Uno R3 (Digital):
 
 ![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/d7448798-93df-4d9a-9819-427505eec2f7)
