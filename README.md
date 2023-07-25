@@ -14,16 +14,23 @@ The arduino controlling the mirrors looks like this:
 
 # How to run this app on mac?
 
+## Step 1
+
+```
 git clone https://github.com/sjsu-smallwood-group/mirror-control-js.git
 cd mirror-control
+> ./run-gui-serial-port-com.sh
+```
 
+The above script will start 2 subsystems:
 Subsystem1: Run gui
 Subsystem2: Run serial-port-communicator
-Subsystem3: Run code-on-arduino
 
-> ./run-gui-serial-port-com.sh
+## Step 2
 
-## System diagram
+After step 1 we need to start Subsystem3 i.e the app on arduino. To do that, you need to open the arduino IDE and open the file `code-on-arduino/take-serial-input.ino` and then click the upload button.
+
+# System diagram
 
 ```
 +-----------+   USB   +------------+   Wires  +--------------+         +--------------+
@@ -55,13 +62,13 @@ CREATE TABLE tblObservations(
     material TEXT,
     collaborator TEXT,
     experiementRanBy TEXT,
-	temperature_kelvin TEXT,
-	dateTimeUpdated TEXT,
+    temperature_kelvin TEXT,
+    dateTimeUpdated TEXT,
     motor1_abs_X INTEGER,
-	motor1_abs_Y INTEGER,
+    motor1_abs_Y INTEGER,
     motor2_abs_X INTEGER,
     motor2_abs_Y INTEGER,
     notes TEXT,
-	image BLOB
-  )
+    image BLOB
+)
 ```
