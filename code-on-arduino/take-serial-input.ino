@@ -16,14 +16,14 @@ So there are 4 kinds of screw turns. 2 for Motor A (X and Y Axis) and 2 for Moto
 */
 
 // Motor control pins
-// This is motor A that will control the first mirror
+// This is motor 1 that will control the first mirror
 int motor1_ChnB_step_pin = 11; // A step pin
 int motor1_ChnB_dir_pin = 10; // A direction pin
 
 int motor1_ChnC_step_pin = 9; // A step pin
 int motor1_ChnC_dir_pin = 8; // A direction pin
 
-// This is motor B that will control the second mirror To disable set the pin numbers to 0
+// This is motor 2 that will control the second mirror To disable set the pin numbers to 0
 int motor2_ChnA_step_pin = 6; // B step pin
 int motor2_ChnA_dir_pin = 5; // B direction pin
 
@@ -67,6 +67,16 @@ void do_steps(int turns, int step_pin, int dir_pin) {
     digitalWrite(dir_pin, 0);
   else if(turns == 0)
     return;
+
+  // Debugging code
+  Serial.print("Step pin: ");
+  Serial.println(step_pin);
+  Serial.print("Direction pin: ");
+  Serial.println(dir_pin);
+  Serial.print("Turns: ");
+  Serial.println(turns);
+  Serial.print("Current direction: ");
+  Serial.println(digitalRead(dir_pin));    
   
   turns = abs(turns);  // always use the absolute value of turns
 
