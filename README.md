@@ -10,7 +10,9 @@ The lab setup looks like this:
 
 <img width="920" alt="Screenshot 2023-07-24 at 7 16 27 PM" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/bbcef07f-68bb-4049-a933-76ff2e0a2819">
 
+Circuit diagram for controlling 2 picomotors using Arduino Uno R3 (Digital):
 
+[Copy of Circuit diagram for synchonizing two picomotors (Digital).pdf](https://github.com/sjsu-smallwood-group/mirror-control/files/12156553/Copy.of.Circuit.diagram.for.synchonizing.two.picomotors.Digital.pdf)
 
 
 The arduino controlling the mirrors looks like this:
