@@ -17,18 +17,18 @@ So there are 4 kinds of screw turns. 2 for Motor A (X and Y Axis) and 2 for Moto
 
 // Motor control pins
 // This is motor 1 that will control the first mirror
-int motor1_ChnB_step_pin = 11; // A step pin
-int motor1_ChnB_dir_pin = 10; // A direction pin
+long motor1_ChnB_step_pin = 11; // A step pin
+long motor1_ChnB_dir_pin = 10; // A direction pin
 
-int motor1_ChnC_step_pin = 9; // A step pin
-int motor1_ChnC_dir_pin = 8; // A direction pin
+long motor1_ChnC_step_pin = 9; // A step pin
+long motor1_ChnC_dir_pin = 8; // A direction pin
 
 // This is motor 2 that will control the second mirror To disable set the pin numbers to 0
-int motor2_ChnA_step_pin = 6; // B step pin
-int motor2_ChnA_dir_pin = 5; // B direction pin
+long motor2_ChnA_step_pin = 6; // B step pin
+long motor2_ChnA_dir_pin = 5; // B direction pin
 
-int motor2_ChnC_step_pin = 2; // B step pin
-int motor2_ChnC_dir_pin = 3; // B direction pin
+long motor2_ChnC_step_pin = 2; // B step pin
+long motor2_ChnC_dir_pin = 3; // B direction pin
 
 void setup()
 {
@@ -44,19 +44,17 @@ void setup()
   pinMode(motor1_ChnC_step_pin, OUTPUT); 
   pinMode(motor1_ChnC_dir_pin, OUTPUT); 
   
-  
   pinMode(motor2_ChnA_step_pin, OUTPUT); 
   pinMode(motor2_ChnA_dir_pin, OUTPUT); 
   pinMode(motor2_ChnC_step_pin, OUTPUT); 
   pinMode(motor2_ChnC_dir_pin, OUTPUT); 
-  
 }
 
-void do_steps(int turns, int step_pin, int dir_pin) {
+void do_steps(long turns, long step_pin, long dir_pin) {
   
   // If the step pin or direction pin is not set then return
   // Allow the user to disable a motor by setting the pin numbers to 0 
-  if(step_pin ==0 || dir_pin == 0) {
+  if(step_pin == 0 || dir_pin == 0) {
     return;
   }
 
@@ -80,7 +78,7 @@ void do_steps(int turns, int step_pin, int dir_pin) {
   
   turns = abs(turns);  // always use the absolute value of turns
 
-  for(int n = 0; n < turns; n++) {
+  for(long n = 0; n < turns; n++) {
     digitalWrite(step_pin, 1);
     delay(1);
     digitalWrite(step_pin, 0);
@@ -95,11 +93,11 @@ void loop()
         incomingString.trim(); // remove any leading/trailing whitespace
 
         // Split the incoming string by commas into an array
-        int incomingData[4];
-        int index = 0;
-        int lastCommaIndex = 0;
+        long incomingData[4];
+        long index = 0;
+        long lastCommaIndex = 0;
 
-        for (int i = 0; i < incomingString.length(); i++) {
+        for (long i = 0; i < incomingString.length(); i++) {
       if (incomingString[i] == ',' || (i == incomingString.length() - 1 && incomingString[i] != ',')) {
         incomingData[index] = incomingString.substring(lastCommaIndex, i + (incomingString[i] != ',' ? 1 : 0)).toInt();
         index++;
@@ -108,10 +106,10 @@ void loop()
     }
 
     // Extract the number of turns for each Motor and axis
-    int motor1_ChnB_turns = incomingData[0];
-    int motor1_ChnC_turns = incomingData[1];
-    int motor2_ChnA_turns = incomingData[2];
-    int motor2_ChnC_turns = incomingData[3];
+    long motor1_ChnB_turns = incomingData[0];
+    long motor1_ChnC_turns = incomingData[1];
+    long motor2_ChnA_turns = incomingData[2];
+    long motor2_ChnC_turns = incomingData[3];
 
     // Execute steps based on the number of turns for each Motor and axis
     do_steps(motor1_ChnB_turns, motor1_ChnB_step_pin, motor1_ChnB_dir_pin);
