@@ -7,7 +7,9 @@ The app controlling the mirrors look like this:
 ![Screenshot of app](./docs/screenshot-of-app.png)
 
 The lab setup looks like this:
-![Picture of the lab setup](./docs/lab-setup.jpeg)
+
+![Uploading Screenshot 2023-07-24 at 7.10.50 PM.png…]()
+
 
 The arduino controlling the mirrors looks like this:
 ![Picture of the arduino controlling the mirrors](./docs/arduino-controlling-the-mirrors.jpg)
