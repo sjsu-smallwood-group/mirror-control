@@ -28,7 +28,7 @@ int motor2_ChnA_step_pin = 6; // B step pin
 int motor2_ChnA_dir_pin = 5; // B direction pin
 
 int motor2_ChnC_step_pin = 2; // B step pin
-int motor2_ChnC_dir_pin = 1; // B direction pin
+int motor2_ChnC_dir_pin = 3; // B direction pin
 
 void setup()
 {
