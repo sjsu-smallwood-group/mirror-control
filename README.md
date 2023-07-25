@@ -8,7 +8,8 @@ The app controlling the mirrors look like this:
 
 The lab setup looks like this:
 
-<img width="1000" alt="Screenshot 2023-07-24 at 7 10 50 PM" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/959aaee9-631b-465f-a458-365b4ad84c2b">
+<img width="920" alt="Screenshot 2023-07-24 at 7 16 27 PM" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/bbcef07f-68bb-4049-a933-76ff2e0a2819">
+
 
 
 
