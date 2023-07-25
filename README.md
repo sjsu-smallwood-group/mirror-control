@@ -1,31 +1,16 @@
-This system will create an experimental log that looks like this:
+This system will create an experiment notebook that looks like this:
 
-![Screenshot of end goal](./docs/experimental-log-on-7-22-2023.png)
-
-Updated on 7/24:
-
-<img width="1669" alt="experiment-log-on7-24" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/b5dbb40e-aa54-4c36-bbf5-e9121390c89c">
-
+![Screenshot of end goal](./docs/experiments-notebook-on-7-24-2023.png)
 
 The app controlling the mirrors look like this:
 
 ![Screenshot of app](./docs/screenshot-of-app.png)
 
-Updated on 7/24:
-
-<img width="1270" alt="Screenshot-of-app 2023-07-24 at 11 54 48 AM" src="https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/3e635855-56ec-469a-b5f8-c3a65a41344b">
-
-
 The lab setup looks like this:
 ![Picture of the lab setup](./docs/lab-setup.jpeg)
 
 The arduino controlling the mirrors looks like this:
-![Picture of the arduino controlling the mirrors](./docs/arduino-controlling-the-mirrors.jpeg)
-
-Updated on 7/24:
-
-![IMG_4087](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/74f170fc-d1da-479e-ba80-b32cc059c253)
-
+![Picture of the arduino controlling the mirrors](./docs/arduino-controlling-the-mirrors.jpg)
 
 # How to run this app on mac?
 
@@ -68,6 +53,7 @@ Subsystem3: Run code-on-arduino
 CREATE TABLE tblObservations(
     id INTEGER PRIMARY KEY,
     material TEXT,
+    collaborator TEXT,
     experiementRanBy TEXT,
 	temperature_kelvin TEXT,
 	dateTimeUpdated TEXT,
