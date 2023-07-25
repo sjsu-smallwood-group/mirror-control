@@ -12,7 +12,7 @@ The lab setup looks like this:
 
 Circuit diagram for controlling 2 picomotors using Arduino Uno R3 (Digital):
 
-![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/025cb387-fcde-494a-9f41-64b3796cfa85)
+![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/d7448798-93df-4d9a-9819-427505eec2f7)
 
 
 
