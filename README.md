@@ -20,7 +20,8 @@ The arduino controlling the mirrors looks like this:
 
 Circuit diagram for controlling 2 picomotors using Arduino Uno R3 (Digital):
 
-![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/d7448798-93df-4d9a-9819-427505eec2f7)
+![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/e2733789-7c69-4625-9b24-05ddc6ae694a)
+
 
 
 
