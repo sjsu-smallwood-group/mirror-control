@@ -5,10 +5,12 @@
     <label>&nbsp;&nbsp;&nbsp;Experimenter:
         <select v-model="experimentDetails.experimenter">
             <option value=""></option>
-            <option value="Hediye">Hediye</option>
             <option value="Ayane">Ayane</option>
             <option value="Edric">Edric</option>
-            <option value="Prof. Smallwood">Prof. Smallwood</option>
+            <option value="Hediye">Hediye</option>
+            <option value="Ian">Ian</option>
+            <option value="Dr. Smallwood">Dr. Smallwood</option>
+            <option value="Takuto">Takuto</option>
         </select>
     </label>
     <label>&nbsp;&nbsp;&nbsp;Element:
@@ -137,11 +139,12 @@ export default {
     },
     
     saveSliders() {
-      const dateTimeUpdated = new Date().toISOString();
+        const date = new Date();
+        const dateTimeUpdated = date.toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
         const { x: Motor1_X, y: Motor1_Y } = this.sliders.Motor1;
         const { x: Motor2_X, y: Motor2_Y } = this.sliders.Motor2;
 
-        const insertRowSql = `INSERT INTO tblObservations(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y,material, experiementRanBy, temperature_kelvin) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y},
+        const insertRowSql = `INSERT INTO tblObservations(dateTimeUpdated, Motor1_abs_X, Motor1_abs_Y, Motor2_abs_X, Motor2_abs_Y,sample, experiementRanBy, temp_kelvin) VALUES('${dateTimeUpdated}', ${Motor1_X}, ${Motor1_Y}, ${Motor2_X}, ${Motor2_Y},
       '${this.experimentDetails.element}',
       '${this.experimentDetails.experimenter}',
       ${this.experimentDetails.temperature})`;

@@ -18,14 +18,9 @@ The arduino controlling the mirrors looks like this:
 
 ![IMG_4091](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/75815874-d275-42b6-85bf-a577f9438966)
 
-
-
 Circuit diagram for controlling 2 picomotors using Arduino Uno R3 (Digital):
 
 ![Copy of Circuit diagram for synchonizing two picomotors (Digital)](https://github.com/sjsu-smallwood-group/mirror-control/assets/121723290/e2733789-7c69-4625-9b24-05ddc6ae694a)
-
-
-
 
 # How to run this app on mac?
 
@@ -74,16 +69,16 @@ After step 1 we need to start Subsystem3 i.e the app on arduino. To do that, you
 ```
 CREATE TABLE tblObservations(
     id INTEGER PRIMARY KEY,
-    material TEXT,
+    sample TEXT,
     collaborator TEXT,
     experiementRanBy TEXT,
-    temperature_kelvin TEXT,
-    dateTimeUpdated TEXT,
+    temp_kelvin TEXT,
+    notes TEXT,
+    image BLOB
     motor1_abs_X INTEGER,
     motor1_abs_Y INTEGER,
     motor2_abs_X INTEGER,
     motor2_abs_Y INTEGER,
-    notes TEXT,
-    image BLOB
+    dateTimeUpdated TEXT,
 )
 ```
