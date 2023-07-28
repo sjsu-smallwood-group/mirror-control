@@ -82,3 +82,7 @@ CREATE TABLE tblObservations(
     dateTimeUpdated TEXT,
 )
 ```
+
+Video that explains how to start the program:
+https://drive.google.com/file/d/145L-uPAMrEC0yE-OpZWiD-maVv1Q035u/view?usp=sharing
+
