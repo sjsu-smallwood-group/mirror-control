@@ -3,10 +3,10 @@ On the serial port the input data will come in the format 10,-2,3,4 basically 4 
 
 This code will seperate it into 4 values and then run a function on each value.
 
-The first value i.e. 10 is # of screw turns for Motor A Channel B in the clockwise direction.
-The second value i.e. -2 indicates 2 is # of screw turns for Channel C in the anti clockwise direction.
+The first value i.e. -2 is # of screw turns for Motor A Channel B in the clockwise direction.
+The second value i.e. 10 indicates 2 is # of screw turns for Channel C in the anti clockwise direction.
 
-The third value i.e. 3 indicates 3 is # of screw turns for Motor B Channel B in the clockwise direction.
+The third value i.e. 3 indicates 3 is # of screw turns for Motor B Channel A in the clockwise direction.
 The fourth value i.e. 4 indicates 4 is # of screw turns for Motor B Channel C in the anti clockwise direction.
 
 So there are 4 kinds of screw turns. 2 for Motor A (X and Y Axis) and 2 for Motor B (X and Y axis)
@@ -106,10 +106,14 @@ void loop()
     }
 
     // Extract the number of turns for each Motor and axis
-    long motor1_ChnB_turns = incomingData[0];
-    long motor1_ChnC_turns = incomingData[1];
+    long motor1_ChnB_turns = incomingData[1];
+    long motor1_ChnC_turns = incomingData[0];
     long motor2_ChnA_turns = incomingData[2];
     long motor2_ChnC_turns = incomingData[3];
+
+    // Account for flipping axies
+    motor1_ChnC_turns = -1 * motor1_ChnC_turns;
+    motor2_ChnC_turns = -1 * motor2_ChnC_turns;
 
     // Execute steps based on the number of turns for each Motor and axis
     do_steps(motor1_ChnB_turns, motor1_ChnB_step_pin, motor1_ChnB_dir_pin);
